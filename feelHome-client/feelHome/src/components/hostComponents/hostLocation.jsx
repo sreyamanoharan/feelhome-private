@@ -1,7 +1,10 @@
 import React from 'react'
+import {useNavigate} from 'react-router-dom'
 import map from './../../../src/images/map.png'
 import { useState } from 'react'
 import axios from 'axios'
+import { hostDatas } from '../../../src/store/slice/Host.js';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const hostLocation = () => {
@@ -10,6 +13,10 @@ const [latitude,setLatitude]=useState(0)
 const [longitude,setLongitude]=useState(0)
 const [suggetion,setSuggetion] = useState(false)
 const [locationSuggestions,setLocationSuggestions]=useState([])
+const [selectedLocation,setSelectedLocation]=useState('')
+const [selectedLocationHeading,setSelectedLocationHeading]=useState('')
+const navigate=useNavigate()
+const dispatch = useDispatch();
 
 
 const getLocationSuggestions = async (query) => {
@@ -17,7 +24,7 @@ const getLocationSuggestions = async (query) => {
     const endpoint = `https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json`;
     const params = {
         access_token: MAPBOX_API_KEY,
-        types: 'place,locality,neighborhood', // Limit results to places only
+        types: 'place', // Limit results to places only
         limit: 5, // Number of suggestions to retrieve
         country:"IN"
     };
@@ -34,9 +41,19 @@ const getLocationSuggestions = async (query) => {
 // Function to handle location suggestion selection
 const handleLocationSuggestion = async (query) => {
     // Get location suggestions when the user types
-    const suggestions = await getLocationSuggestions(query);
+    const suggestions = await getLocationSuggestions(query); 
     setLocationSuggestions(suggestions);
 };
+
+
+const handleLocationClick=(location)=>{
+    setSelectedLocation(location)
+    setSelectedLocationHeading(location)
+    console.log(location);
+    dispatch(hostDatas(location))
+}
+
+
 
   return (
     <>
@@ -58,6 +75,8 @@ const handleLocationSuggestion = async (query) => {
           handleLocationSuggestion(e.target.value); // Fetch suggestions as the user types
       }}
       value = {location}
+       
+
        placeholder="Location" className={`w-full text-sm mt-2 p-5 bg-white flex border border-boarder text-black bg-main`}/>
         {/* Display location suggestions */}
         <ul className='absolute z-0 mt-2 w-full bg-main border border-border rounded-lg shadow-lg text-black'>
@@ -99,7 +118,7 @@ const handleLocationSuggestion = async (query) => {
 
   
     <div className='mt-12'>
-    <a href='/hostAddress' className='bg-black text-white px-4 py-2'>Next</a>
+    <button onClick={()=>handleLocationClick(location)}  className='bg-black text-white px-4 py-2'>Next</button>
     </div>
     </div>
 

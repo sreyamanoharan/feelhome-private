@@ -1,5 +1,6 @@
 import React from 'react'
 import Home from '../../../src/images/HostHome.webp'
+import map from '../../../src/images/map.png'
 
 const hostHome = () => {
   return (
@@ -13,9 +14,10 @@ const hostHome = () => {
    <p className='text-center text-3xl text-black mt-1'>You can earn...</p>
    </div>
    </div>
-   <div className='bg-red-500 w-full h-screen flex items-center' >
+   <div className='bg-white w-full h-screen flex items-center' >
 
-   <div className='bg-orange-400 h-5/6 w-9/12'></div>
+  
+   <img className='bg-orange-400 h-5/6 w-9/12' src={map}/>
    </div>
    
     </div>

@@ -98,7 +98,8 @@ const bannerSubmit=async(id) =>{
 
       setMainHeading('');
       setDescription('');
-      setSelectedFile(null);
+      setMessage('Error adding banner. Please try again.');
+      console.log(error);
     } catch (error) {
       setMessage('Error adding banner. Please try again.');
       console.log(error);

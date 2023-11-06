@@ -1,11 +1,32 @@
-import React from 'react'
-import {AiOutlineWifi} from 'react-icons/ai'
-import {PiTelevisionSimpleBold} from 'react-icons/pi'
-import {GiCampingTent} from 'react-icons/gi'
-import {GiWashingMachine} from 'react-icons/gi'
+import React,  { useEffect ,useState} from 'react'
+import axiosInstance from '../../api/axios'
+import {useNavigate} from 'react-router-dom'
+import { hostDatas } from '../../../src/store/slice/Host.js';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const hostAmenities = () => {
+      const [feature,setFeature]=useState([])
+      const navigate=useNavigate()
+      const [selectedFeature,setSelectedFeature]=useState([])
+    
+      const dispatch=useDispatch()
+
+
+      useEffect(()=>{
+         axiosInstance.get('/getFeature').then((res)=>{
+          setFeature(res.data.feature)
+         }).catch(err=>{
+          console.log(err);
+         })
+      },[])
+
+      const handleFeatureClick=(heading)=>{
+      
+        console.log(heading,'ASDFGHJKASDFGHJK');
+        dispatch(hostDatas({selectedFeature:heading}))
+      }
+
   return (
     <>
     <div className='bg-white h-screen w-full flex flex-col justify-center items-center'>
@@ -14,25 +35,29 @@ const hostAmenities = () => {
      
       <h1 className='text-black mt-3 text-3xl'>Which of these best describes your place</h1>
       <div>
-      <div class="flex">
+      <div className="flex">
+
+      {feature.map(feature=>(
+        <div
+                  key={feature.id}
+                  className={`w-1/3 p-4 border text-center mt-6 ${
+                    selectedFeature === feature ? 'selected-feature' : ''
+                  }`}
+                  onClick={() => handleFeatureClick(feature.heading)} 
+                >
+                  {selectedFeature=== feature && (
+                    <div className="selected-tick">✔</div> 
+                  )}
+                  <div className="text-3xl text-black">
+                    <img src={feature.featureImage} alt={feature.heading} />
+                  </div>
+                  <div className="text-black">{feature.heading}</div>
+                </div>
+      ))}
       
-    <div class="w-1/3 p-4  border border-black  text-center mt-6">
-    <div class="text-3xl text-black"><AiOutlineWifi/></div>
-    <div className='text-black'>Beach House</div>
-    </div>
-    <div className="w-1/3 p-4 border border-black  text-center mt-6">
-    <div className="text-3xl text-black"><GiCampingTent/></div>
-    <div className='text-black'>Camping</div>
-    </div>
-    <div className="w-1/3 p-4 border border-black  text-center mt-6">
-    <div className="text-3xl text-black "> <PiTelevisionSimpleBold/></div>
-    <div  className='text-black'>Treehouse</div>
-    </div>
-    <div className="w-1/3 p-4 border border-black  text-center mt-6">
-    <div className="text-3xl text-black "> <GiWashingMachine/></div>
-    <div  className='text-black'>Treehouse</div>
-    </div>
-    </div>
+ 
+   
+  </div>
 
     </div>
     </div>

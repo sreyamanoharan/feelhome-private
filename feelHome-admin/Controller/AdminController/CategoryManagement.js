@@ -18,11 +18,12 @@ export const addCategory=async (req,res)=>{
         console.log(error);
     }
 }
+
 export const getCategory=async(req,res)=>{
     try {
-        console.log('come get category');
+      
         const category=await CategorySchema.find()
-        console.log(category,'geetttttcategoryyyyy....');
+
         res.status(200).json({category})
     } catch (error) {
         res.status(200).json({errmsg:'server down'})

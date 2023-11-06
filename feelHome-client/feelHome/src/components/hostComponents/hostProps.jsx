@@ -4,8 +4,8 @@ const hostProps = () => {
   return (
     <>
     <div className='flex'>
-    <div className='bg-red-600 h-96 w-full'>
-    <p>asdfghjklkjhgfdsqwertyuio</p>
+    <div className='bg-white h-96 w-full'>
+ 
     <div className="card w-96 bg-base-100 shadow-xl">
     <figure className="px-10 pt-10">
     <img src="/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" className="rounded-xl" />

@@ -24,6 +24,11 @@ import HostAmenities from './components/hostComponents/hostAmenities'
 import HostPhotos from './components/hostComponents/hostPhotos'
 import Categorylist from './components/adminComponents/CategoryComponents/categorylist'
 import AdminLogin from './components/Login/AdminLogin'
+import MainFeature from './components/adminComponents/Features/mainFeature'
+import TypeFeature from './components/adminComponents/Features/typeFeature'
+import HostFinish from './components/hostComponents/hostFinish'
+import HostPrice from './components/hostComponents/hostPrice'  
+
 
 
 function App() {
@@ -58,6 +63,11 @@ console.log(token)
     <Route path='/hostPhotos' element={<HostPhotos/>}/>
     <Route path='/admin/categorylist' element={<Categorylist/>}/>
     <Route path='/admin/login' element={<AdminLogin/>}/> 
+    <Route path='/admin/mainFeature' element={<MainFeature/>}/> 
+    <Route path='/admin/typeFeature' element={<TypeFeature/>}/> 
+    <Route path='/admin/hostFinish' element={<HostFinish/>}/>
+    <Route path='/admin/hostPrice' element={<HostPrice/>}/>
+
 
     </Routes>
     </Router>

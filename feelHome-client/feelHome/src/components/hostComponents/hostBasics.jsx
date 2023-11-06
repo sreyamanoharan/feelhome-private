@@ -1,6 +1,10 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const hostBasics = () => {
+
+  const navigate = useNavigate();
+
   return (
     <>
     <div className='bg-white h-screen w-full flex flex-col justify-center items-center'>
@@ -10,7 +14,7 @@ const hostBasics = () => {
       <h1 className='text-black mt-3 text-3xl'>Share some basics about your place</h1>
      
       <div className="mt-7 text-black flex">
-        {/* Column 2: Content */}
+       
         <p className='flex justify-start'>Guests</p>
         <div className='flex justify-end ml-80'>
        
@@ -20,7 +24,7 @@ const hostBasics = () => {
       </div>
       </div>
       <div className="mt-8 text-black flex">
-        {/* Column 3: Content */}
+      
         <p className='flex justify-start'>Bedrooms</p>
         <div className='flex justify-end ml-80'>
        
@@ -31,7 +35,7 @@ const hostBasics = () => {
 
       </div>
       <div className="mt-8 text-black flex justify-start">
-        {/* Column 4: Content */}
+       
         <p>Beds</p>
         <div className='flex justify-end ml-80'>
        
@@ -42,7 +46,7 @@ const hostBasics = () => {
 
       </div>
       <div className="mt-8 text-black flex justify-start">
-      {/* Column 4: Content */}
+    
       <p>Bathrooms</p>
       <div className='flex justify-end ml-80'>
        
@@ -59,7 +63,10 @@ const hostBasics = () => {
       </div>
     
       <div className='mt-12'>
-      <a href='/hostStPlace' className='bg-black text-white px-4 py-2'>Next</a>
+      <button
+      onClick={() => navigate('/hostStPlace')}
+      className="bg-black text-white px-4 py-2"
+    >Next</button>
       </div>
     </div>
   

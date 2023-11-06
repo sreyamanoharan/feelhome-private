@@ -3,17 +3,19 @@ import {persistStore,persistReducer,FLUSH,REHYDRATE,PERSIST,PURGE,REGISTER, PAUS
 import storage from "redux-persist/lib/storage"
 import {user} from './slice/user'
 // import { Admin } from "./slice/admin";
+import { host } from "./slice/Host";
 
 const userPersistConfig = {key:"userAuth",storage,version:1}
 const adminPersistConfig = {key:"adminAuth",storage,version:1}
+const hostPersistConfig={key:'hostAuth',storage,version:1}
 
 const userPersistReducer = persistReducer(userPersistConfig,user.reducer)
-// const adminPersistReducer = persistReducer(adminPersistConfig,Admin.reducer)
+const hostPersistReducer = persistReducer(hostPersistConfig,host.reducer)
 
 export const Store = configureStore({
     reducer: {
         User: userPersistReducer,
-        // Admin:adminPersistReducer
+        Host:hostPersistReducer
         
     },
     middleware:(getDefaultMiddleware) => 

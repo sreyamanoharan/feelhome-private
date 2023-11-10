@@ -49,7 +49,8 @@ export const hostSlice=createSlice({
           address: {},
           selectedLocation: "",
           images: [],
-          selectedBasics: {}
+          selectedBasics: {},
+          selectedPrice: ""
     },
     reducers:{
    
@@ -75,11 +76,15 @@ export const hostSlice=createSlice({
         },
         addSelectedFeature:(state,action)=>{
           state.selectedFeature = [...state.selectedFeature,action.payload.selectedFeature]
-
+        },
+        addSelectedPrice:(state, action) => {
+          console.log(action.payload.selectedPrice);
+          state.selectedPrice = parseFloat(action.payload.selectedPrice);
         }
+
     }
 
 })
 
-export const {addSelectedFeature,addSelectedBasics,addImage,addAddress,addSelectedLocation,addSelectedType,addSelectedCategory} = hostSlice.actions
+export const {addSelectedFeature,addSelectedPrice,addSelectedBasics,addImage,addAddress,addSelectedLocation,addSelectedType,addSelectedCategory} = hostSlice.actions
 export default hostSlice.reducer

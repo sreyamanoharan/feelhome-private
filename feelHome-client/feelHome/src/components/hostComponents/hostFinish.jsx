@@ -1,15 +1,13 @@
 import React from 'react'
-import {useNavigate,useSelector} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
+import { useSelector } from 'react-redux';
+import axiosInstance from '../../api/axios';
 
 
 const hostFinish = () => {
   const navigate= useNavigate()
-  const hostData=useSelector(state=>state.Host)
 
-  const handleSubmit=async(e)=>{
-    const hostData=useSelector(state=>state.Host)
-    await axiosInstance.post('/host/postDatas',{hostData})
-  }
+
 
   return (
     <>
@@ -31,7 +29,7 @@ const hostFinish = () => {
   </div>
   
     <div className='mt-12'>
-    <a onClick={()=>navigate('/hostPrice')} className='bg-black text-white px-4 py-2'>Next</a>
+    <a onClick={handleSubmit} className='bg-black text-white px-4 py-2'>Next</a>
     </div>
     </div>
 

@@ -7,7 +7,7 @@ import axios from 'axios';
   const hostPhotos = () => {
 
     const hostData = useSelector(state => state.Host)
-    console.log(hostData.images,"this is my host redux value");
+    console.log(hostData,"this is my host redux value");
     
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -28,22 +28,30 @@ import axios from 'axios';
       dispatch(addImage({ images: imageStrings }));
     };
     const handleImageSubmit = async () => {
-      const array = []
       console.log("dooooooooooooo");
-      uploadedImages.map(async file => {
-        const formData = new FormData();
-          formData.append('file', file);
-          formData.append('upload_preset', 'feelhomeimage');
-        const result = await axios.post(
-          'https://api.cloudinary.com/v1_1/ds0dvm4ol/image/upload?upload_preset=feelHome',
-          formData
-          );
-          console.log('jjjjj');
-          console.log(result.data.secure_url);
-          array.push(result.data.secure_url)
+      return new Promise((resolve, reject) => {
+        if(uploadedImages.length == 0){
+          resolve(true)
+        }
+        uploadedImages.map(async (file, index) => {
+          const formData = new FormData();
+            formData.append('file', file);
+            formData.append('upload_preset', 'feelhomeimage');
+          const result = await axios.post(
+            'https://api.cloudinary.com/v1_1/ds0dvm4ol/image/upload?upload_preset=feelHome',
+            formData
+            );
+            console.log('jjjjj');
+            console.log(result.data.secure_url);
+            dispatch(addImage({ images: result.data.secure_url }));
+            if(uploadedImages.length == index+1){
+              setUploadedImages([])
+              resolve(true)
+            }
+        })
+        
       })
-      console.log(array, "hey");
-      dispatch(addImage({ images: array }));
+     
     };
     
 
@@ -60,7 +68,7 @@ import axios from 'axios';
   hostData.images.map((imageName, index) => (
     
     <div key={index} style={{ marginRight: '10px' }}>
-      {console.log(imageName)}
+      {console.log(hostData.images.length)}
       <img
         src={`${imageName}`} 
         alt={`uploaded-${index}`}

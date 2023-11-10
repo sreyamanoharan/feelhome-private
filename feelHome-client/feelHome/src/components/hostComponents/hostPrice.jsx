@@ -1,6 +1,8 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const hostPrice = () => {
+  const navigate = useNavigate()
   return (
     <>
     <div className='bg-white h-screen w-full flex flex-col justify-center items-center'>
@@ -22,7 +24,12 @@ const hostPrice = () => {
       </button>
     </div>
     </div>
+    <div className='mt-12'>
+    <button onClick={()=>navigate('/hostFinal')} className='bg-black text-white px-4 py-2'>Next</button>
     </div>
+    </div>
+ 
+    
     </>
   )
 }

@@ -1,8 +1,8 @@
 import express ,{Router} from "express"
 const hostRouter = express.Router()
-import { addPhoto } from "../Controller/HostController/PhotoController.js";
+import { postData } from "../Controller/HostController/HostController.js";
 
-hostRouter.post('/addPhoto',addPhoto)
+hostRouter.post('/postData',postData)
 
 
 

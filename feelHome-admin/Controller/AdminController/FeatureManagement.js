@@ -3,8 +3,8 @@ import mongoose from 'mongoose'
 
 export const addFeature= async (req,res)=>{
     try {
-     
-        console.log(req.body);
+        const {heading,featureImage}=req.body
+        console.log(heading);
         const feature= new featureCollection({
             heading,
             featureImage

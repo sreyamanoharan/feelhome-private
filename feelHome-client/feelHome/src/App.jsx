@@ -28,6 +28,10 @@ import MainFeature from './components/adminComponents/Features/mainFeature'
 import TypeFeature from './components/adminComponents/Features/typeFeature'
 import HostFinish from './components/hostComponents/hostFinish'
 import HostPrice from './components/hostComponents/hostPrice'  
+import HostFinal from './components/hostComponents/hostFinal'
+import Check from './pages/check'
+
+
 
 
 
@@ -41,6 +45,7 @@ console.log(token)
     <Router>
     <Routes>
     <Route path='/userlogin' element={<UserLogin/>}/>
+    <Route path='/check' element={<Check/>}/>
     <Route path='/register' element={<Register/>}/>
     <Route path='/verifyMail/:userId' element={<VerifyEmail/>}/>
     <Route path='/home' element={<Home/>}/>
@@ -61,12 +66,14 @@ console.log(token)
     <Route path='/hostStPlace' element={<HostStPlace/>}/>
     <Route path='/hostAmenities' element={<HostAmenities/>}/>
     <Route path='/hostPhotos' element={<HostPhotos/>}/>
+    <Route path='/hostFinish' element={<HostFinish/>}/>
+    <Route path='/hostPrice' element={<HostPrice/>}/>
+    <Route path='/hostFinal' element={<HostFinal/>}/>
     <Route path='/admin/categorylist' element={<Categorylist/>}/>
     <Route path='/admin/login' element={<AdminLogin/>}/> 
     <Route path='/admin/mainFeature' element={<MainFeature/>}/> 
     <Route path='/admin/typeFeature' element={<TypeFeature/>}/> 
-    <Route path='/admin/hostFinish' element={<HostFinish/>}/>
-    <Route path='/admin/hostPrice' element={<HostPrice/>}/>
+
 
 
     </Routes>

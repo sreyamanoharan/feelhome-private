@@ -6,12 +6,13 @@ import mongoose from 'mongoose'
 export const addCategory=async (req,res)=>{
     try {
         const {heading,categoryImage}=req.body
-        console.log(req.body);
+
         const category=new CategorySchema({
             heading,
             categoryImage
         })
         let categories= await category.save()
+        console.log(categories,'categories here',category);
         if(categories) res.status(200).json({category})
         else res.status(500).json({error:'internal server error'})
     } catch (error) {

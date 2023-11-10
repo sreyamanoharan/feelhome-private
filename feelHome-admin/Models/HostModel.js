@@ -1,26 +1,26 @@
 import mongoose from 'mongoose'
 
 const HostSchema= new mongoose.SchemaType({
-      category:{
+  selectedCategory:{
          type:String
     },
-      type:{
+    selectedType:{
         type:String
     },
-      feature:{
+    selectedFeature:{
         type:Array
     },
       address:{
+        type:Object
+    },
+    selectedLocation:{
         type:Array
     },
-      location:{
+    images:{
         type:Array
     },
-      image:{
-        type:Array
-    },
-      basics:{
-        type:Array
+    selectedBasics:{
+        type:Object
     }
 })
 

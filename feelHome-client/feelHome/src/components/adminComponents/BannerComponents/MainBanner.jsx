@@ -10,7 +10,6 @@ const MainBanner = () => {
   const [mainHeading, setMainHeading] = useState('');
   const [description, setDescription] = useState('');
   const [loading, setLoading] = useState('');
-
   const [modalOpen, setModalOpen] = useState(false);
   const [message, setMessage] = useState('');
   const [reload,setReload]=useState(false)

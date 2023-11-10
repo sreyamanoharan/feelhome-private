@@ -1,4 +1,3 @@
-
 import BannerCollection from './../../Models/BannerModel.js'
 import adminRoute from './../../Routes/AdminRoute.js'
 import mongoose from 'mongoose'

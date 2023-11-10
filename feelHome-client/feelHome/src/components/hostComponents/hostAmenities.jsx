@@ -1,8 +1,8 @@
 import React,  { useEffect ,useState} from 'react'
 import axiosInstance from '../../api/axios'
 import {useNavigate} from 'react-router-dom'
-import { hostDatas } from '../../../src/store/slice/Host.js';
 import { useDispatch, useSelector } from 'react-redux';
+import { addSelectedFeature } from '../../store/slice/Host';
 
 
 const hostAmenities = () => {
@@ -11,7 +11,9 @@ const hostAmenities = () => {
       const [selectedFeature,setSelectedFeature]=useState([])
     
       const dispatch=useDispatch()
-
+      const reduxFeature=(heading)=>{
+      dispatch(addSelectedFeature({selectedFeature:heading}))
+      }
 
       useEffect(()=>{
          axiosInstance.get('/getFeature').then((res)=>{
@@ -21,12 +23,7 @@ const hostAmenities = () => {
          })
       },[])
 
-      const handleFeatureClick=(heading)=>{
       
-        console.log(heading,'ASDFGHJKASDFGHJK');
-        dispatch(hostDatas({selectedFeature:heading}))
-      }
-
   return (
     <>
     <div className='bg-white h-screen w-full flex flex-col justify-center items-center'>
@@ -43,7 +40,7 @@ const hostAmenities = () => {
                   className={`w-1/3 p-4 border text-center mt-6 ${
                     selectedFeature === feature ? 'selected-feature' : ''
                   }`}
-                  onClick={() => handleFeatureClick(feature.heading)} 
+                  onClick={() => reduxFeature(feature.heading)} 
                 >
                   {selectedFeature=== feature && (
                     <div className="selected-tick">✔</div> 

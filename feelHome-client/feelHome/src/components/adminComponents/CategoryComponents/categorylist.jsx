@@ -13,8 +13,13 @@ const categorylist = () => {
     const [reload,setReload]=useState(false)
     const [message,setMessage]=useState('')
 
+    const handleModalOpen=()=>{
+      setModalOpen(true)
+    }
+
    
     const uploadImagesToCloudinary = async (files) => {
+      console.log("here");
         const imageUrl = [];
         
         for (let i = 0; i < files.length; i++) {
@@ -24,12 +29,12 @@ const categorylist = () => {
           formData.append('upload_preset', 'feelhomeimage');
           
           try {
-            console.log('kkkkkkk ');
+            console.log('categoryyyyyyyyyyyy ');
             const result = await axios.post(
               'https://api.cloudinary.com/v1_1/ds0dvm4ol/image/upload?upload_preset=feelHome',
               formData
               );
-              console.log('jjjjj');
+              console.log('category22222222');
               console.log(result.data.secure_url);
             imageUrl.push(result.data.secure_url);
           } catch (error) {
@@ -67,7 +72,7 @@ const categorylist = () => {
         console.log(inputObject);
         const response = await axiosInstance.post('/admin/postCategory',inputObject);
         if(response.data.category){
-          setCategory([response.data.banner,
+          setCategory([response.data.category,
             ...category
           ]);
           toast.success('category added successfully!')
@@ -76,8 +81,9 @@ const categorylist = () => {
   
   
         setHeading('');
+        setLoading('')
        
-        setSelectedFile(null);
+        setSelectedFile('');
       } catch (error) {
         setMessage('Error adding banner. Please try again.');
         console.log(error);
@@ -117,7 +123,7 @@ const categorylist = () => {
       </a>
     </div>
     <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
-    <button className="btn btn-active btn-accent" onClick={() => setModalOpen(true)} style={{ marginRight: '10px' }}>
+    <button className="btn btn-active btn-accent" onClick={handleModalOpen} style={{ marginRight: '10px' }}>
   Add New Category
 </button>
 
@@ -136,16 +142,16 @@ const categorylist = () => {
         {category.map((data,index) => (
           <tr key={data._id}> 
           <td className="px-4 py-2 text-center">
-                <img src={data.categoryImage} alt=""  width="100px" className="mx-auto"/>
+                <img src={data?.categoryImage?data?.categoryImage:''} alt=""  width="100px" className="mx-auto"/>
               </td>
               <td className="px-4 py-2 text-center text-black">{data.heading}</td>
               <td className="px-4 py-2 text-center text-black">
               {data.categoryStatus === true ? (
-                <a onClick='' className="btn btn-secondary">
+                <a onClick={() => {}}  className="btn btn-secondary">
                   Disable
                 </a>
               ) : (
-                <a onClick='' className="btn btn-primary">
+                <a onClick={() => {}} className="btn btn-primary">
                   Enable
                 </a>
               )}
@@ -188,25 +194,21 @@ const categorylist = () => {
                 className="border p-2 w-full"
               />
             </div>
-            <div className="flex -justify-center space-x-4 items-center">
-              <button className="bg-gray-800 btn text-white" type="submit">
-                {loading !== 'addingCategory' ? (
-                  'Add New Category'
-                ) : (
-                  <p className="w-5 h-5 rounded-full border-4 border-t-transparent border-white animate-spin" />
-                )}
-              </button>
-              <button
-                className="btn btn-secondary bg-red-500 text-white hover:bg-red-600"
-                onClick={() => {
-                  setModalOpen(false);
-                  // Reset the categoryImage state
-                  // Reset the categoryHeading state
-                }}
-              >
-                Close
-              </button>
-            </div>
+            <div className='flex - justify-center space-x-4 items-center'>
+                  <button
+                    className=" bg-gray-800 btn text-white "
+                    type="submit"
+                  >
+                  { loading !== 'addingCategory'?
+                  'Add New Category':<><p  className='w-5 h-5 rounded-full border-4 border-t-transparent border-white animate-spin'/>adding</>}
+                  </button>
+                  <button
+                    className="btn btn-secondary bg-red-500 text-white hover:bg-red-600"
+                    onClick={()=>setModalOpen(false)}
+                  >
+                    Close
+                  </button>
+                </div>
           </form>
         </div>
       </div>

@@ -3,11 +3,15 @@ import {useNavigate} from 'react-router-dom'
 import map from './../../../src/images/map.png'
 import { useState } from 'react'
 import axios from 'axios'
-import { hostDatas } from '../../../src/store/slice/Host.js';
+import { addSelectedLocation } from '../../store/slice/Host'
 import { useDispatch, useSelector } from 'react-redux';
 
 
 const hostLocation = () => {
+
+const hostData=useSelector(state=>state.Host)
+console.log(hostData);
+    
 const [location,setLocation]=useState('')
 const [latitude,setLatitude]=useState(0)
 const [longitude,setLongitude]=useState(0)
@@ -18,6 +22,10 @@ const [selectedLocationHeading,setSelectedLocationHeading]=useState('')
 const navigate=useNavigate()
 const dispatch = useDispatch();
 
+const reduxLocation=(heading)=>{
+    dispatch(addSelectedLocation({selectedLocation:heading}))
+    navigate('/hostAddress')
+  }
 
 const getLocationSuggestions = async (query) => {
     const MAPBOX_API_KEY = 'pk.eyJ1IjoibmloYWxyb3NoYW4iLCJhIjoiY2xsZGIyNW5wMGFxMjN1cXkwZm5reHlrdSJ9.l2JGuFbgbkgYWJl4vDOUig';
@@ -46,12 +54,7 @@ const handleLocationSuggestion = async (query) => {
 };
 
 
-const handleLocationClick=(location)=>{
-    setSelectedLocation(location)
-    setSelectedLocationHeading(location)
-    console.log(location);
-    dispatch(hostDatas(location))
-}
+
 
 
 
@@ -118,7 +121,7 @@ const handleLocationClick=(location)=>{
 
   
     <div className='mt-12'>
-    <button onClick={()=>handleLocationClick(location)}  className='bg-black text-white px-4 py-2'>Next</button>
+    <button onClick={()=>reduxLocation(location)}  className='bg-black text-white px-4 py-2'>Next</button>
     </div>
     </div>
 

@@ -1,15 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import {useNavigate} from 'react-router-dom'
 import axiosInstance from '../../api/axios';
-import { hostDatas } from '../../../src/store/slice/Host.js';
 import { useDispatch, useSelector } from 'react-redux';
+import { addSelectedCategory } from '../../store/slice/Host';
+
 
 const HostType = () => {
+  const hostData = useSelector(state => state.Host)
+  console.log(hostData);
   const [category, setCategory] = useState([]);
   const navigate = useNavigate()
   const [selectedCategory, setSelectedCategory] = useState(null); // To store selected category
- 
+  
   const dispatch = useDispatch();
+  
+  const reduxCategory=(heading)=>{
+    dispatch(addSelectedCategory({selectedCategory:heading}))
+  }
+
 
   useEffect(() => {
     axiosInstance
@@ -22,13 +30,9 @@ const HostType = () => {
       });
   }, []);
 
-  const handleCategoryClick = (heading) => {
-    console.log("this is check",heading);
-    dispatch(hostDatas({selectedCategory:heading}))
 
-  };
   
-  const valueA = useSelector(state => state.selectedCategory)
+
  
 
 
@@ -48,7 +52,7 @@ const HostType = () => {
                   className={`w-1/3 p-4 border text-center mt-6 ${
                     selectedCategory === type ? 'selected-category' : ''
                   }`}
-                  onClick={() => handleCategoryClick(type.heading)} // Pass the selected category
+                  onClick={() => reduxCategory(type.heading)} // Pass the selected category
                 >
                    {selectedCategory === type && (
                   <div className="selected-tick">✔</div> // Selected tick animation

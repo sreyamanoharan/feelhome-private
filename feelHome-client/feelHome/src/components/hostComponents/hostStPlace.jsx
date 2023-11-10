@@ -1,6 +1,8 @@
 import React from 'react'
+import {useNavigate} from 'react-router-dom'
 
 const hostStPlace = () => {
+  const navigate= useNavigate()
   return (
     <>
     <div className='bg-white h-screen w-full flex flex-col justify-center items-center'>
@@ -27,7 +29,7 @@ const hostStPlace = () => {
   </div>
   
     <div className='mt-12'>
-    <a href='/hostAmenities' className='bg-black text-white px-4 py-2'>Next</a>
+    <a onClick={()=>navigate('/hostAmenities')} className='bg-black text-white px-4 py-2'>Next</a>
     </div>
     </div>
     </>

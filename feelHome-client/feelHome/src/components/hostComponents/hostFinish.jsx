@@ -1,6 +1,16 @@
 import React from 'react'
+import {useNavigate,useSelector} from 'react-router-dom'
+
 
 const hostFinish = () => {
+  const navigate= useNavigate()
+  const hostData=useSelector(state=>state.Host)
+
+  const handleSubmit=async(e)=>{
+    const hostData=useSelector(state=>state.Host)
+    await axiosInstance.post('/host/postDatas',{hostData})
+  }
+
   return (
     <>
     <div className='bg-white h-screen w-full flex flex-col justify-center items-center'>
@@ -21,7 +31,7 @@ const hostFinish = () => {
   </div>
   
     <div className='mt-12'>
-    <a href='' className='bg-black text-white px-4 py-2'>Next</a>
+    <a onClick={()=>navigate('/hostPrice')} className='bg-black text-white px-4 py-2'>Next</a>
     </div>
     </div>
 

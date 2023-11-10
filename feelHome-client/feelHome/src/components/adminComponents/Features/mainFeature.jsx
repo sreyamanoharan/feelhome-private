@@ -11,9 +11,15 @@ const mainFeature = () => {
     const [modalOpen,setModalOpen]=useState(false)
     const [reload,setReload]=useState(false)
     const [message,setMessage]=useState('')
+    
+    
+    const handleModalOpen=()=>{
+      setModalOpen(true)
+    }
 
  
     const uploadImagesToCloudinary = async (files) => {
+      console.log('featuresss///////');
         const imageUrl = [];
         
         for (let i = 0; i < files.length; i++) {
@@ -23,12 +29,12 @@ const mainFeature = () => {
           formData.append('upload_preset', 'feelhomeimage');
           
           try {
-            console.log('kkkkkkk ');
+            console.log('vvv=======vvvvvv');
             const result = await axios.post(
               'https://api.cloudinary.com/v1_1/ds0dvm4ol/image/upload?upload_preset=feelHome',
               formData
               );
-              console.log('jjjjj');
+              console.log('==================');
               console.log(result.data.secure_url);
             imageUrl.push(result.data.secure_url);
           } catch (error) {
@@ -68,6 +74,7 @@ const mainFeature = () => {
       setMessage('Error adding banner. Please try again.');
       console.log(error);
       setSelectedFile(null);
+      setLoading('')
     } catch (error) {
       setMessage('Error adding banner. Please try again.');
       console.log(error);
@@ -77,8 +84,11 @@ const mainFeature = () => {
   useEffect(()=>{
     axiosInstance.get('/admin/getFeature').then((res)=>{
         setFeature(res.data.feature)
+        console.log(res.data.feature);
+    }).catch((error)=>{
+      console.log('Error fetching featureData',error);
     })
-  },[]) 
+  },[reload]) 
 
     
   const handleFileChange = (e) => {
@@ -99,7 +109,7 @@ const mainFeature = () => {
       </a>
     </div>
     <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
-    <button className="btn btn-active btn-accent" onClick={() => setModalOpen(true)} style={{ marginRight: '10px' }}>
+    <button className="btn btn-active btn-accent" onClick={handleModalOpen} style={{ marginRight: '10px' }}>
   Add New Feature
 </button>
 
@@ -123,7 +133,7 @@ const mainFeature = () => {
               <td className="px-4 py-2 text-center text-black">{data.heading}</td>
               <td className="px-4 py-2 text-center text-black">
               {data.featureStatus === true ? (
-                <a onClick= {handleSubmit} className="btn btn-secondary">
+                <a onClick= '' className="btn btn-secondary">
                   Disable
                 </a>
               ) : (
@@ -170,25 +180,21 @@ const mainFeature = () => {
                 className="border p-2 w-full"
               />
             </div>
-            <div className="flex -justify-center space-x-4 items-center">
-              <button className="bg-gray-800 btn text-white" type="submit">
-                {loading !== 'addingFeature' ? (
-                  'Add New Feature'
-                ) : (
-                  <p className="w-5 h-5 rounded-full border-4 border-t-transparent border-white animate-spin" />
-                )}
-              </button>
-              <button
-                className="btn btn-secondary bg-red-500 text-white hover:bg-red-600"
-                onClick={() => {
-                  setModalOpen(false);
-                  // Reset the categoryImage state
-                  // Reset the categoryHeading state
-                }}
-              >
-                Close
-              </button>
-            </div>
+            <div className='flex - justify-center space-x-4 items-center'>
+                  <button
+                    className=" bg-gray-800 btn text-white "
+                    type="submit"
+                  >
+                  { loading !== 'addingFeature'?
+                  'Add New Feature':<><p  className='w-5 h-5 rounded-full border-4 border-t-transparent border-white animate-spin'/>adding</>}
+                  </button>
+                  <button
+                    className="btn btn-secondary bg-red-500 text-white hover:bg-red-600"
+                    onClick={()=>setModalOpen(false)}
+                  >
+                    Close
+                  </button>
+                </div>
           </form>
         </div>
       </div>

@@ -29,7 +29,7 @@ const hostFinish = () => {
   </div>
   
     <div className='mt-12'>
-    <a onClick={handleSubmit} className='bg-black text-white px-4 py-2'>Next</a>
+    <button onClick={()=>navigate('/host/hostPrice')}className='bg-black text-white px-4 py-2'>Next</button>
     </div>
     </div>
 

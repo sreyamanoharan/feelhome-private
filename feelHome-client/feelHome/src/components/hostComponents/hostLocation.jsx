@@ -24,7 +24,7 @@ const dispatch = useDispatch();
 
 const reduxLocation=(heading)=>{
     dispatch(addSelectedLocation({selectedLocation:heading}))
-    navigate('/hostAddress')
+    navigate('/host/hostAddress')
   }
 
 const getLocationSuggestions = async (query) => {
@@ -86,7 +86,7 @@ const handleLocationSuggestion = async (query) => {
              {
                           suggetion && locationSuggestions.map((suggestion) => (
                               <li key={suggestion.id}
-                              className="p-2 hover:bg-subMain cursor-pointer"
+                              className="p-2 hover:bg-subMain bg-white hover:bg-gray-200 cursor-pointer"
                               >
                                   {/* Assuming you want to display the place name as a suggestion */}
                                   <button

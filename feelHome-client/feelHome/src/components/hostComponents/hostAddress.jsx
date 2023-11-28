@@ -31,9 +31,10 @@ const hostAddress = () => {
  
   const reduxAddress=(e)=>{
     e.preventDefault();
+    console.log(address);
     dispatch(addAddress({address:address}))
      
-   
+    navigate('/host/hostBasics')
   } 
   
 
@@ -77,7 +78,7 @@ const hostAddress = () => {
     </div>
    
     <div className='mt-12'>
-    <a onClick={()=>navigate('/hostBasics')} className='bg-black text-white px-4 py-2'>Next</a>
+    <button type='submit' className='bg-black text-white px-4 py-2'>Next</button>
     </div>
   </form>
   </div>

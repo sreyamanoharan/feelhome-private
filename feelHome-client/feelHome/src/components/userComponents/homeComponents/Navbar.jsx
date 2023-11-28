@@ -1,9 +1,12 @@
 import React from 'react'
 
 import home from '../../../../src/images/homestay.jpg'
+import { useDispatch } from 'react-redux'
+import { userLogout } from '../../../store/slice/user'
 
 
 const Navbar = () => {
+  const dispatch = useDispatch()
   return (
     <div className="navbar bg-white">
 
@@ -12,8 +15,15 @@ const Navbar = () => {
 
     </div>
     <div class="">
-    <a href='/hostHome' class="px-4 py-2 mr-4 bg-red-700 rounded text-white">Host your Home</a>
+    <a href='/host/hostHome' class="px-4 py-2 mr-4 bg-red-700 rounded text-white">Host your Home</a>
   </div>
+  <div class="">
+    <a href='/bookings' class="px-4 py-2 mr-4 bg-red-700 rounded text-white">My Bookings</a>
+  </div>
+  <div class="">
+    <a href='/home' class="px-4 py-2 mr-4 bg-red-700 rounded text-white">Home</a>
+  </div>
+  
   
     <div className="flex-none">
       
@@ -30,7 +40,9 @@ const Navbar = () => {
               <span className="badge"></span>
             </a>
           </li>
-          <li><a>Logout</a></li>
+          <li><a onClick={()=>{
+            dispatch(userLogout())
+          }}>Logout</a></li>
         </ul>
       </div>
     </div>

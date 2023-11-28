@@ -24,7 +24,7 @@ const hostPage = () => {
   </div>
   
     <div className='mt-12'>
-    <a href='/hostType' className='bg-black text-white px-4 py-2'>Next</a>
+    <a href='/host/hostType' className='bg-black text-white px-4 py-2'>Next</a>
     </div>
     </div>
 

@@ -80,11 +80,21 @@ export const hostSlice=createSlice({
         addSelectedPrice:(state, action) => {
           console.log(action.payload.selectedPrice);
           state.selectedPrice = parseFloat(action.payload.selectedPrice);
+        },
+        reduxClear:(state,action)=>{
+           state.selectedCategory=null
+           state.selectedType=null
+           state.selectedFeature=[]
+           state.address=null
+           state.selectedLocation=null
+           state.images=[]
+           state.selectedBasics=null
+           state.selectedPrice=null
         }
 
     }
 
 })
 
-export const {addSelectedFeature,addSelectedPrice,addSelectedBasics,addImage,addAddress,addSelectedLocation,addSelectedType,addSelectedCategory} = hostSlice.actions
+export const {addSelectedFeature,addSelectedPrice,addSelectedBasics,addImage,addAddress,addSelectedLocation,addSelectedType,addSelectedCategory,reduxClear} = hostSlice.actions
 export default hostSlice.reducer

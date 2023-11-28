@@ -1,28 +1,34 @@
 import React from 'react'
 import {useNavigate} from 'react-router-dom'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axiosInstance from '../../api/axios';
+import { reduxClear } from '../../store/slice/Host';
 
 const hostFinal = () => {
   const navigate= useNavigate()
+  const dispatch=useDispatch()
+
+  const userEmail=useSelector(state=>state.User.userId)
   const hostData=useSelector(state=>state.Host)
-  console.log(hostData,'here is the hostDatasssssss');
+  console.log(hostData,userEmail,'here is the hostDatasssssss');
 
 
     const handleSubmit = async () => {
       
-      await axiosInstance.post('/host/postData',{hostData})
+      await axiosInstance.post('/host/postData',{hostData,userEmail})
+      dispatch(reduxClear({}))
+      navigate('/host/hostHome')
     }
+
   return (
     <>
      <div className='bg-white h-screen w-full flex flex-col justify-center items-center'>
 
 <div className='text-center'>
-  <a className='text-black'>Step 4444</a>
-  <h1 className='text-black mt-3 text-3xl'>Finish up and publish</h1>
+  <a className='text-black'>Congratulationssss</a>
+  <h1 className='text-black mt-3 text-3xl'></h1>
   <h3 className='text-black mt-8'>
-    Finally, you'll choose booking settings, set up pricing and publish your
-    <br />
+   
     listing.
   </h3>
 </div>
@@ -33,7 +39,7 @@ const hostFinal = () => {
 </div>
 
 <div className='mt-12 cursor-pointer'>
-    <a onClick={handleSubmit} className='bg-black text-white px-4 py-2'>Next</a>
+    <button onClick={handleSubmit} className='bg-black text-white px-4 py-2'>Next</button>
     </div>
 </div>
 

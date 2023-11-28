@@ -9,10 +9,16 @@ const hostAmenities = () => {
       const [feature,setFeature]=useState([])
       const navigate=useNavigate()
       const [selectedFeature,setSelectedFeature]=useState([])
-    
+      const [selected, setSelected] = useState([])
       const dispatch=useDispatch()
-      const reduxFeature=(heading)=>{
-      dispatch(addSelectedFeature({selectedFeature:heading}))
+      
+
+      const manageSelected = (feature) => {
+        if(selected.includes(feature)){
+          setSelected(selected.filter(item => item!=feature))
+        }else{
+          setSelected([...selected, feature])
+        }
       }
 
       useEffect(()=>{
@@ -22,6 +28,13 @@ const hostAmenities = () => {
           console.log(err);
          })
       },[])
+
+      const handleSubmit = () => {
+        selected.forEach(item => {
+          dispatch(addSelectedFeature({selectedFeature:item}))
+        })
+        navigate('/host/hostPhotos')
+      }
 
       
   return (
@@ -34,13 +47,13 @@ const hostAmenities = () => {
       <div>
       <div className="flex">
 
-      {feature.map(feature=>(
+      {feature.map((feature, index)=>(
         <div
                   key={feature.id}
-                  className={`w-1/3 p-4 border text-center mt-6 ${
+                  className={`${selected.includes(feature) && `bg-gray-400`} w-1/3 p-4 border text-center mt-6 ${
                     selectedFeature === feature ? 'selected-feature' : ''
                   }`}
-                  onClick={() => reduxFeature(feature.heading)} 
+                  onClick={() => { manageSelected(feature); reduxFeature(feature.heading); }} 
                 >
                   {selectedFeature=== feature && (
                     <div className="selected-tick">✔</div> 
@@ -65,7 +78,7 @@ const hostAmenities = () => {
     </div>
   
     <div className='mt-12'>
-    <a href='/hostPhotos' className='bg-black text-white px-4 py-2'>Next</a>
+    <button onClick={handleSubmit} className='bg-black text-white px-4 py-2'>Next</button>
     </div>
     </div>
     </>

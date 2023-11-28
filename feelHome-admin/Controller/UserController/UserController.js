@@ -172,5 +172,6 @@ export default {
   ClientRegister,
   sendVerifyMail,
   verifyMail,
-  login
+  login,
+  resendMail
 };

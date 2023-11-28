@@ -10,6 +10,7 @@ import { addSelectedType } from '../../store/slice/Host';
 const hostPlace = () => {
 
   const hostData=useSelector(state=>state.Host)
+  const [selected, setSelected] = useState(null)
   console.log(hostData);
 
     const navigate= useNavigate()
@@ -33,7 +34,7 @@ const hostPlace = () => {
  
     <div>
       <div className="mt-5" >
-        <div className="w-full p-4 border border-black" onClick={()=>reduxType('An entire place')}>
+        <div className={`w-full p-4 border border-black cursor-pointer ${selected==0 && `bg-gray-300`}`} onClick={()=>{setSelected(0); reduxType('An entire place');}}>
           <div className="flex items-center">
             <div>
               <div className="text-2xl text-black">
@@ -44,7 +45,7 @@ const hostPlace = () => {
             <div className="ml-auto text-3xl text-black"><AiFillHome/></div>
           </div>
         </div>
-        <div className="w-full p-4 border  border-black" onClick={()=>reduxType('A room')}>
+        <div className={`w-full p-4 border  border-black cursor-pointer ${selected==1 && `bg-gray-300`}`} onClick={()=>{setSelected(1); reduxType('A room');}}>
           <div className="flex items-center">
             <div>
               <div className="text-2xl text-black">A room</div>
@@ -53,7 +54,7 @@ const hostPlace = () => {
             <div className="ml-auto text-3xl text-black"><MdMeetingRoom/></div>
           </div>
         </div>
-        <div className="w-full p-4 border  border-black" onClick={()=>reduxType('Shared room')}>
+        <div className={`w-full p-4 border  border-black cursor-pointer ${selected==2 && `bg-gray-300`}`} onClick={()=>{setSelected(2); reduxType('Shared room')}}>
           <div className="flex items-center">
             <div>
               <div className="text-2xl text-black">Shared room</div>
@@ -73,7 +74,7 @@ const hostPlace = () => {
   
 
     <div className='mt-12'>
-    <a onClick={()=>navigate('/hostLocation')} className='bg-black text-white px-4 py-2'>Next</a>
+    <button onClick={()=>navigate('/host/hostLocation')} className='bg-black text-white px-4 py-2'>Next</button>
     </div>
     </div>
     </>

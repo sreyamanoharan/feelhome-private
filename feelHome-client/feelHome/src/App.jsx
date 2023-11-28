@@ -5,33 +5,20 @@ import Register from './components/Register'
 import VerifyEmail from './pages/userPages/VerifyEmail'
 import Home from './pages/userPages/Home'
 import Catpage from './pages/userPages/Catpage'
-import MainBanner from './pages/AdminPages/BannerPages/mainBanner'
-// import AddBanner from './components/adminComponents/BannerComponents/AddBanner'
-import AdminNav from './components/adminComponents/adminNav'
 import { useSelector} from 'react-redux'
 import UserProfile from './pages/userPages/mainPages/userProfile'
-import HostHome from './pages/HostPages/HostHome'
-import HostProps from './pages/HostPages/hostProps'
-import HostPage from './components/hostComponents/hostPage'
-import HostType from './components/hostComponents/hostType'
-import HostPlace from './components/hostComponents/hostPlace'
-import HostLocation from './components/hostComponents/hostLocation'
-import HostAddress from './components/hostComponents/hostAddress'
-import Test from './components/hostComponents/Test'
-import HostBasics from './components/hostComponents/hostBasics'
-import HostStPlace from './components/hostComponents/hostStPlace'
-import HostAmenities from './components/hostComponents/hostAmenities'
-import HostPhotos from './components/hostComponents/hostPhotos'
-import Categorylist from './components/adminComponents/CategoryComponents/categorylist'
 import AdminLogin from './components/Login/AdminLogin'
-import MainFeature from './components/adminComponents/Features/mainFeature'
-import TypeFeature from './components/adminComponents/Features/typeFeature'
-import HostFinish from './components/hostComponents/hostFinish'
-import HostPrice from './components/hostComponents/hostPrice'  
-import HostFinal from './components/hostComponents/hostFinal'
 import Check from './pages/check'
-
-
+import PropDetails from './components/hostComponents/propDetails'
+import HomeData from './components/userComponents/homeComponents/homeData'
+import PropertyDetails from './pages/userPages/mainPages/propertyDetails'
+import PaymentDetails from './components/userComponents/mainComponents/paymentDetails'
+import MainBanner from './components/adminComponents/BannerComponents/MainBanner'
+import AdminRoute from './routes/adminRoutes'
+import HostRoute from './routes/hostRoutes'
+import PaymentFail from './components/userComponents/mainComponents/paymentFail'
+import PaymentSuccess from './components/userComponents/mainComponents/paymentSuccess'
+import Bookings from './pages/userPages/mainPages/bookings'
 
 
 
@@ -45,36 +32,32 @@ console.log(token)
     <Router>
     <Routes>
     <Route path='/userlogin' element={<UserLogin/>}/>
+
     <Route path='/check' element={<Check/>}/>
     <Route path='/register' element={<Register/>}/>
     <Route path='/verifyMail/:userId' element={<VerifyEmail/>}/>
     <Route path='/home' element={<Home/>}/>
     <Route path='/Catpage' element={<Catpage/>}/>
     <Route path='/' element={<MainBanner/>}/>
-    <Route path='/admin/addBanner' element={<MainBanner/>}/>
-    <Route path='/adnav' element={<AdminNav/>}/>
+    {/* <Route path='/admin/addBanner' element={<MainBanner/>}/>
+    <Route path='/adnav' element={<AdminNav/>}/> */}
     <Route path='/userProfile' element={<UserProfile/>}/>
-    <Route path='/hostHome' element={<HostHome/>}/>
-    <Route path='/hostProps' element={<HostProps/>}/>
-    <Route path='/hostPage' element={<HostPage/>}/>
-    <Route path='/hostType' element={<HostType/>}/>
-    <Route path='/hostPlace' element={<HostPlace/>}/>
-    <Route path='/hostLocation' element={<HostLocation/>}/>
-    <Route path='/hostAddress' element={<HostAddress/>}/>
-    <Route path='/test' element={<Test/>}/>
-    <Route path='/hostBasics' element={<HostBasics/>}/>
-    <Route path='/hostStPlace' element={<HostStPlace/>}/>
-    <Route path='/hostAmenities' element={<HostAmenities/>}/>
-    <Route path='/hostPhotos' element={<HostPhotos/>}/>
-    <Route path='/hostFinish' element={<HostFinish/>}/>
-    <Route path='/hostPrice' element={<HostPrice/>}/>
-    <Route path='/hostFinal' element={<HostFinal/>}/>
-    <Route path='/admin/categorylist' element={<Categorylist/>}/>
+    {/* <Route path='/admin/categorylist' element={<Categorylist/>}/>
     <Route path='/admin/login' element={<AdminLogin/>}/> 
     <Route path='/admin/mainFeature' element={<MainFeature/>}/> 
-    <Route path='/admin/typeFeature' element={<TypeFeature/>}/> 
+    <Route path='/admin/typeFeature' element={<TypeFeature/>}/>  */}
+  
+    <Route path='/homeData' element={<HomeData/>}/>
+    <Route path='/propertyDetails/:id' element={<PropertyDetails/>}/>
+    <Route path='/paymentDetails' element={<PaymentDetails/>}/>
+    <Route path="/paymentSuccess/:load" element={<PaymentSuccess/>}/>
+    <Route path='/paymentFail' element={<PaymentFail/>}/>
+    <Route path='/bookings' element={<Bookings/>}/>
 
 
+    
+    <Route path='/admin/*' element={<AdminRoute/>}/>
+    <Route path='/host/*' element={<HostRoute/>}/>
 
     </Routes>
     </Router>

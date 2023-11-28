@@ -3,10 +3,15 @@ import beach from '../../../../src/images/beach.jpeg'
 import treehouse from '../../../../src/images/treehouse.png'
 import { Carousel, Typography} from "@material-tailwind/react";
 import axiosInstance from '../../../api/axios';
+
+import { useSelector } from 'react-redux';
  
 const Banner =()=> {
 
   const[banners,setBanners]= useState([])
+  const userId = useSelector(state=>state.User.userId)
+
+  console.log('sreyaid',userId)
 
   useEffect(()=>{
     axiosInstance.get('/banners').then(res=>{

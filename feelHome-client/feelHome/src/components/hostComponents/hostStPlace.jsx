@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {useNavigate} from 'react-router-dom'
 
 const hostStPlace = () => {
+
+  
   const navigate= useNavigate()
   return (
     <>
@@ -29,7 +31,7 @@ const hostStPlace = () => {
   </div>
   
     <div className='mt-12'>
-    <a onClick={()=>navigate('/hostAmenities')} className='bg-black text-white px-4 py-2'>Next</a>
+    <a onClick={()=>navigate('/host/hostAmenities')} className='bg-black text-white px-4 py-2'>Next</a>
     </div>
     </div>
     </>

@@ -38,7 +38,7 @@ const categorylist = () => {
               console.log(result.data.secure_url);
             imageUrl.push(result.data.secure_url);
           } catch (error) {
-            // Handle error here if needed
+           
             console.error('Error uploading image:', error);
           }
         }
@@ -213,7 +213,7 @@ const categorylist = () => {
         </div>
       </div>
     )}
-  </div>
+    </div>
     </>
   )
 }

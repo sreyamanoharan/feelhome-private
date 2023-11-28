@@ -8,19 +8,31 @@ const HostSchema = new mongoose.Schema({
     type: String,
   },
   selectedFeature: {
-    type: [String], // Assuming it's an array of strings
+    type: [String], 
   },
   address: {
     type: Object,
   },
   selectedLocation: {
-    type: [String], // Assuming it's an array of strings
+    type: [String], 
+  },
+  selectedPrice:{
+    type:Number
   },
   images: {
-    type: [String], // Assuming it's an array of strings (file paths or URLs)
+    type: [String], 
   },
   selectedBasics: {
     type: Object,
+  },
+  hostId:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:'User',
+    required:true
+  },
+  isBooked:{
+    type:Boolean,
+    default:false
   },
 });
 

@@ -11,7 +11,7 @@ const hostPrice = () => {
 
   const handleSubmit = async () => {
     dispatch(addSelectedPrice({selectedPrice: price}))
-    navigate('/hostFinal')
+    navigate('/host/hostFinal')
   }
 
   return (

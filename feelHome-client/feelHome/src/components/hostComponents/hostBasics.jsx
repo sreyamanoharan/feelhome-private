@@ -77,7 +77,7 @@ import { addSelectedBasics } from '../../store/slice/Host';
 
 const HostBasics = () => {
   const hostData = useSelector(state => state.Host)
-  console.log(hostData,"this is my host redux value");
+  console.log(hostData,"this is my host redux value hsh");
   const navigate = useNavigate();
   const [basics, setBasics] = useState({
     Guests: 0,
@@ -104,7 +104,7 @@ const HostBasics = () => {
       ...basics,
       [name]:value
     })
-    navigate('/hostStPlace')
+   
   }
 
   
@@ -113,14 +113,16 @@ const HostBasics = () => {
     console.log("hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
     dispatch(addSelectedBasics({selectedBasics:basics}))
     console.log(hostData,"this is my host redux value");
+    navigate('/host/hostStPlace')
    
   } 
 
   return (
     <div className='w-full h-screen flex justify-center items-center bg-white'>
-    {/* <h2>Basic Counts</h2> */}
+  
     <div className='text-black'>
-      <ul>
+    <h2 className='text-3xl'>Share Some Basics About Your Place</h2>
+      <ul className='mt-6'>
         {Object.keys(basics).map((item) => (
           <li key={item} className='flex space-x-10'>
             <h1>{item}</h1>

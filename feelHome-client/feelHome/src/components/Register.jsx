@@ -5,6 +5,7 @@ import { Navigate } from 'react-router-dom'
 import { Toaster, toast } from 'react-hot-toast'
 
 
+
 const Register = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -16,7 +17,14 @@ const Register = () => {
   const regex_password = /^(?=.*?[A-Z])(?=.*[a-z])(?=.*[0-9]){8,16}/
   const regex_mobile = /^\d{10}$/
 
-
+  const clearForm = () => {
+    setName('');
+    setEmail('');
+    setPhoneNumber('');
+    setPassword('');
+    setConfirmPassword('');
+    setErr(null);
+  };
 
   const handleSubmit = async () => {
 
@@ -27,7 +35,7 @@ const Register = () => {
       
         if (res.data.message) {
           toast.success(res.data.message);
-           Navigate('/userlogin')
+          clearForm ()
         }
       }).catch((err)=>{
         if(err.response.status===404){
@@ -87,7 +95,7 @@ const Register = () => {
                 </label>
                 <input
                   type="text"
-
+                  value={name}
                   className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
                   onChange={(e) => setName(e.target.value)}
                 />
@@ -101,7 +109,7 @@ const Register = () => {
                 </label>
                 <input
                   type="text"
-
+                   value={PhoneNumber}
                   className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
                   onChange={(e) => setPhoneNumber(e.target.value)}
                 />
@@ -115,7 +123,7 @@ const Register = () => {
                 </label>
                 <input
                   type="email"
-
+                  value={email}
                   className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -129,7 +137,7 @@ const Register = () => {
                 </label>
                 <input
                   type="password"
-
+                 value={password}
                   className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
                   onChange={(e) => setPassword(e.target.value)}
                 />
@@ -143,10 +151,11 @@ const Register = () => {
                 </label>
                 <input
                   type="password"
-
+                  value={ConfirmPassword}
                   className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 />
+
               </div>
               <a
                 href="#"
@@ -177,6 +186,7 @@ const Register = () => {
           </div>
         </div>
       </div>
+     
     </>
   );
 };

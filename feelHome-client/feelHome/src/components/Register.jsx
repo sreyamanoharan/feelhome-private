@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import axios from 'axios';
+import axios  from 'axios';
 import axiosInstance from '../api/axios'
 import { Navigate } from 'react-router-dom'
 import { Toaster, toast } from 'react-hot-toast'
@@ -7,6 +7,8 @@ import { Toaster, toast } from 'react-hot-toast'
 
 
 const Register = () => {
+
+  
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [PhoneNumber, setPhoneNumber] = useState('')

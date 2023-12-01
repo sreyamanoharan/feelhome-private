@@ -10,6 +10,8 @@ const hostFinal = () => {
 
   const userEmail=useSelector(state=>state.User.userId)
   const hostData=useSelector(state=>state.Host)
+  const userName=useSelector(state=>state.User.name)
+  console.log(userName);
   console.log(hostData,userEmail,'here is the hostDatasssssss');
 
 
@@ -25,12 +27,10 @@ const hostFinal = () => {
      <div className='bg-white h-screen w-full flex flex-col justify-center items-center'>
 
 <div className='text-center'>
-  <a className='text-black'>Congratulationssss</a>
-  <h1 className='text-black mt-3 text-3xl'></h1>
-  <h3 className='text-black mt-8'>
-   
-    listing.
-  </h3>
+  <a className='text-black text-3xl'>Congratulations {userName}</a>
+
+  <h2 className='text-black mt-3 text-3xl'>Your Property Hasbeen Added to feelHome</h2>
+ 
 </div>
 
 <div className="bg-black w-full mt-16 relative">
@@ -39,7 +39,7 @@ const hostFinal = () => {
 </div>
 
 <div className='mt-12 cursor-pointer'>
-    <button onClick={handleSubmit} className='bg-black text-white px-4 py-2'>Next</button>
+    <button onClick={handleSubmit} className='bg-black text-white px-4 py-2'>Ok</button>
     </div>
 </div>
 

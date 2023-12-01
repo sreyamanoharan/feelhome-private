@@ -13,10 +13,13 @@ export const createCheckoutSession = async (req, res) => {
     try {
         console.log("hereee")
         const userId = req.body.userId
+        console.log(userId,"userid");
         const checkInDate = req.body.checkInDate
         const checkOutDate = req.body.checkOutDate
         const guests = req.body.guests
-
+        console.log(checkInDate,"checkInDate");
+        console.log(checkOutDate,"checkOutDate");
+    console.log("kkkkkkk",req.body.propertyId);
         const property = await hostModel.findOne({ _id: req.body.propertyId })
         const diff = new Date(checkOutDate) - new Date(checkInDate)
         const difference = diff / (1000 * 3600 * 24)
@@ -35,10 +38,14 @@ export const createCheckoutSession = async (req, res) => {
                 }
             ]
         })
+        console.log(existingBooking,"existingBooking");
         if (existingBooking) {
+         
             res.status(409).json({ errMsg: 'This date is already booked' })
             return;
         }else{
+          console.log("sreya");
+          console.log("exist");
             const user = await stripe.customers.create({
                 metadata: {
                   userId: userId,
@@ -71,7 +78,7 @@ export const createCheckoutSession = async (req, res) => {
                 cancel_url: `${BACKEND_URL}paymentFail`,
                 
               })
-             
+              console.log(session,"kkkkkkkkkk");
               res.send({ url: session.url });
               console.log(session.url+'===')
             }

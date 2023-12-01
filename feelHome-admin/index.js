@@ -4,7 +4,10 @@ import express from 'express';
 import userRouter from './Routes/UserRoute.js';
 import adminRouter from './Routes/AdminRoute.js';
 import hostRouter from './Routes/HostRoute.js';
+import chatRouter from './Routes/ChatRoute.js';
 import jwt from 'jsonwebtoken'
+import { Server } from 'socket.io';
+import messageRoute from './Routes/messageRoute.js';
 
 const app = express();
 const port = 3000;
@@ -22,6 +25,8 @@ app.use(express.json()); // Parse JSON request bodies
 app.use('/', userRouter);
 app.use('/admin', adminRouter);
 app.use('/host', hostRouter);
+app.use('/chat',chatRouter)
+app.use('/message',messageRoute)
 
 
 mongoose.connect('mongodb://127.0.0.1:27017/feelHome').then(result=>{
@@ -33,6 +38,22 @@ mongoose.connect('mongodb://127.0.0.1:27017/feelHome').then(result=>{
 
 
 // Start the server
-app.listen(port, () => {
+const server=app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
+const io=new Server(server,{
+  pingTimeout:60000,
+  cors:{
+    origin:["http://localhost:4000"],
+    methods:['GET','POST','PATCH']
+  }
+})
+
+io.on("connection",(socket)=>{
+  console.log("conncted to socket.io");
+  socket.on('setup',(userId)=>{
+    socket.join(userId)
+    socket.emit("connected")
+  })
+})

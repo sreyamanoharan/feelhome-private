@@ -19,7 +19,7 @@ import HostRoute from './routes/hostRoutes'
 import PaymentFail from './components/userComponents/mainComponents/paymentFail'
 import PaymentSuccess from './components/userComponents/mainComponents/paymentSuccess'
 import Bookings from './pages/userPages/mainPages/bookings'
-
+import UserChat from './components/userComponents/mainComponents/userChat'
 
 
 function App() {
@@ -53,7 +53,8 @@ console.log(token)
     <Route path="/paymentSuccess/:load" element={<PaymentSuccess/>}/>
     <Route path='/paymentFail' element={<PaymentFail/>}/>
     <Route path='/bookings' element={<Bookings/>}/>
-
+    <Route path='/userChat' element={<UserChat role={'user'}/>}/>
+   
 
     
     <Route path='/admin/*' element={<AdminRoute/>}/>

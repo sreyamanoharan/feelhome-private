@@ -6,6 +6,7 @@ import HomeData from '../../components/userComponents/homeComponents/homeData'
 
 
 export const Home= () => {
+
   return (
     <div>
     <Navbar/>

@@ -25,10 +25,10 @@ const homeData = () => {
   const handleBooking = async (propertyId) => {
     console.log('hereee')
     if (new Date() >= new Date(checkInDate) || checkInDate == checkOutDate || new Date() >= new Date(checkOutDate) || checkInDate == undefined || checkOutDate == undefined) {
-      
+      console.log('booking......... ---------')
       toast.error("Enter correct dates")
     } else {
-      console.log('hereeeaaaa')
+      console.log('booking.........')
 
       axiosInstance.post('/create-checkout-session', {userId, propertyId, checkInDate, checkOutDate, idProof }).then((res) => {
         if (res.data.url) {
@@ -40,15 +40,15 @@ const homeData = () => {
           console.log('error')
           toast.error(err.response.data.errMsg)
         }
-      })
-    }
-  }
+   })
+ }
+ }
 
 function isValidImage(logo) {
   const validExtensions = ['.jpg', '.jpeg', '.png', '.webp'];
   const extension = logo.substr(logo.lastIndexOf('.')).toLowerCase();
   return validExtensions.includes(extension);
-    }
+}
 
 
 const handleImageChange = (img) => {
@@ -63,8 +63,8 @@ const handleImageChange = (img) => {
     }
   } else {
     toast.error('Add valid image')
-    }
-  };
+    }
+   };
 
 
 
@@ -80,8 +80,12 @@ const handleImageChange = (img) => {
 
   return (
     <>
-      <div className='h-screen bg-white'>
-        <div className='bg-white gap-3 w-full flex'>
+    <div className='h-screen bg-white'>
+    <div class="text-center">
+    <h1 class="text-black text-3xl">Latest Properties</h1>
+    </div>
+        <div className='bg-white gap-3 w-full flex ml-9'>
+       
           {datas.map((data, index) => (
             <div className="card w-96 bg-base-100 shadow-xl mt-5" key={data._id}>
               {/* <figure className="px-10 pt-10">

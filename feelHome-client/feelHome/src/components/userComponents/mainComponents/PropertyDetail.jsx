@@ -25,11 +25,14 @@ useEffect(() => {
     
 
     <div className="bg-white h-screen flex flex-col justify-center items-center">
+       <button  className='bg-red-800'>chat</button>
     <h1 className="text-3xl text-black">Property Details</h1>
+   
     <div className="flex bg-white mt-6">
     
         <div className="flex mt-8" >
           <div className="w-1/2">
+           
             <div className="grid grid-cols-2 gap-3">
               {datas?.images?.slice(0, 4).map((img, index) => (
                 <img key={index} src={img} alt="" />

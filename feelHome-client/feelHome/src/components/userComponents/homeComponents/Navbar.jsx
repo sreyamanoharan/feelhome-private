@@ -3,10 +3,12 @@ import React from 'react'
 import home from '../../../../src/images/homestay.jpg'
 import { useDispatch } from 'react-redux'
 import { userLogout } from '../../../store/slice/user'
+import { useNavigate } from 'react-router-dom'
 
 
 const Navbar = () => {
   const dispatch = useDispatch()
+  const navigate= useNavigate()
   return (
     <div className="navbar bg-white">
 
@@ -42,6 +44,7 @@ const Navbar = () => {
           </li>
           <li><a onClick={()=>{
             dispatch(userLogout())
+            navigate('/userLogin')
           }}>Logout</a></li>
         </ul>
       </div>

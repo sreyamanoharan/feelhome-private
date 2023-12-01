@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import axiosInstance from '../../../api/axios';
 import { toast } from 'react-hot-toast';
+import AdminNav from '../../adminComponents/adminNav';
 
 const categorylist = () => {
 
@@ -109,7 +110,7 @@ const categorylist = () => {
 
 
   return (
-    <>
+   
     <div style={{ background: 'white' }}>
     <div style={{ textAlign: 'center' }}>
       <a
@@ -161,7 +162,9 @@ const categorylist = () => {
         ))}
         </tbody>
       </table>
+    
     </div>
+   
     {modalOpen && (
       <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50 z-50">
         <div className="bg-white text-black font-semibold p-8 rounded-lg shadow-md text-center">
@@ -214,7 +217,7 @@ const categorylist = () => {
       </div>
     )}
     </div>
-    </>
+   
   )
 }
 

@@ -1,5 +1,5 @@
 import React,{ useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import axiosInstance from '../../api/axios'
 
 
@@ -8,7 +8,7 @@ const [datas,setDatas]=useState({})
 const [reload,setReload]=useState(false)
 const {id}=useParams()
 console.log(id);
-
+const navigate=useNavigate()
 useEffect(()=>{
   id && axiosInstance.get(`/host/getDetails/${id}`)
   .then((res)=>{
@@ -25,6 +25,7 @@ useEffect(()=>{
 
     <div className="bg-white h-screen flex flex-col justify-center items-center">
       <h1 className="text-3xl text-black">Property Details</h1>
+      <button onClick={()=>navigate('/host/chat')} className='bg-red-700 text-black'>chat</button>
       <div className="flex bg-white mt-6">
       
           <div className="flex mt-8" >

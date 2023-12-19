@@ -19,7 +19,12 @@ export const createCheckoutSession = async (req, res) => {
         const guests = req.body.guests
         console.log(checkInDate,"checkInDate");
         console.log(checkOutDate,"checkOutDate");
-    console.log("kkkkkkk",req.body.propertyId);
+        console.log("kkkkkkk",req.body.propertyId);
+
+        if (new Date(checkInDate) >= new Date(checkOutDate)) {
+          res.status(400).json({ errMsg: 'Invalid date range. Check-in date must be before check-out date.' });
+          return;
+      }
         const property = await hostModel.findOne({ _id: req.body.propertyId })
         const diff = new Date(checkOutDate) - new Date(checkInDate)
         const difference = diff / (1000 * 3600 * 24)
@@ -84,7 +89,7 @@ export const createCheckoutSession = async (req, res) => {
             }
 
     } catch (error) {
-        res.status(500).json({errMsg:"server erropr"})
+        res.status(500).json({errMsg:"server error"})
         console.log(error);
     }
 }
@@ -139,3 +144,32 @@ export const paymentSuccess = async (req, res) => {
         console.log('booking error',error);
        }
   }
+  export const cancelBooking = async (req, res) => {
+    try {
+      const bookingId = req.params.bookingId;
+  
+      console.log(bookingId, 'boookingggggggggggiiiiiiiiddddddddddddd');
+      const canceledBooking = await rentModel.findOneAndDelete({ _id: bookingId });
+  
+      if (!canceledBooking) {
+        return res.status(404).json({ errMsg: 'Booking not found' });
+      }
+      const user = await userModel.findByIdAndUpdate(
+        canceledBooking.userId,
+        { $inc: { wallet: -canceledBooking.Amount } },
+        { new: true }
+      );
+  
+      // Debit the amount from the host
+      const host = await hostModel.findByIdAndUpdate(
+        canceledBooking.propertyId.hostId,
+        { $inc: { wallet: -canceledBooking.Amount } },
+        { new: true }
+      );
+  
+      res.status(200).json({ success: true, canceledBooking, user, host });
+    } catch (error) {
+      res.status(500).json({ errMsg: 'Server Error' });
+      console.log(error);
+    }
+  };

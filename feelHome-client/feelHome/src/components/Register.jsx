@@ -18,6 +18,7 @@ const Register = () => {
 
   const regex_password = /^(?=.*?[A-Z])(?=.*[a-z])(?=.*[0-9]){8,16}/
   const regex_mobile = /^\d{10}$/
+  const nameRegex = /^[a-zA-Z]+$/
 
   const clearForm = () => {
     setName('');
@@ -56,10 +57,13 @@ const Register = () => {
 
   function singUp(e) {
     e.preventDefault()
+
     if (name.trim().length == 0 || email.trim().length == 0 || PhoneNumber.trim().length == 0 || password.trim().length == 0 || ConfirmPassword.trim().length == 0) {
       setErr('fill all the fields')
     } else {
-      if (regex_mobile.test(PhoneNumber) == false) {
+      if(!nameRegex.test(name)){
+        setErr('Invalid name format. Only letters are allowed.')
+      }else if (regex_mobile.test(PhoneNumber) == false) {
         setErr('wrong Mobile')
       } else if (regex_password.test(password) == false) {
         setErr('Use Strong password');

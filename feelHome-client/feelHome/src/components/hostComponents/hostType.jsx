@@ -3,6 +3,7 @@ import {useNavigate} from 'react-router-dom'
 import axiosInstance from '../../api/axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { addSelectedCategory } from '../../store/slice/Host';
+import { Toaster, toast } from 'react-hot-toast'
 
 
 const HostType = () => {
@@ -12,8 +13,21 @@ const HostType = () => {
   const navigate = useNavigate()
   const [selectedCategory, setSelectedCategory] = useState(null); // To store selected category
   const [selected, setSelected] = useState(null)
+  const [Err, setErr] = useState(null)
   
   const dispatch = useDispatch();
+
+
+  
+  const handleNextClick = () => {
+    if (selected === null) {
+      toast.error('Please select a category before proceeding.'); // Display error message
+      return;
+    }
+
+      navigate("/host/hostLocation")
+  
+  };
   
   const reduxCategory=(heading)=>{
     dispatch(addSelectedCategory({selectedCategory:heading}))
@@ -39,6 +53,7 @@ const HostType = () => {
 
   return (
     <>
+      <Toaster toastOptions={{ duration: 3000 }} />
       <div className="bg-white h-screen w-full flex flex-col justify-center items-center">
         <div className="text-center">
           <h1 className="text-black mt-3 text-3xl">
@@ -68,12 +83,16 @@ const HostType = () => {
             </div>
           </div>
         </div>
+        
         <div className="bg-black w-full mt-16 relative">
           <div className="h-px w-30/100 bg-black"></div>
           <div className="h-px w-70/100 bg-black"></div>
         </div>
         <div className="mt-12">
-          <button className="bg-black text-white px-4 py-2" onClick={()=>navigate("/host/hostPlace")}>
+        <button className="bg-black text-white px-4 py-2" onClick={()=>navigate("/host/hostPlace")}>
+            back
+          </button>
+          <button className="bg-black text-white ml-10 px-4 py-2" onClick={handleNextClick}>
             Next
           </button>
         </div>

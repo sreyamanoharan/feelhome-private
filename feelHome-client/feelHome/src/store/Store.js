@@ -4,6 +4,7 @@ import storage from "redux-persist/lib/storage"
 import {user} from './slice/user'
 // import { Admin } from "./slice/admin";
 import hostSlice from "./slice/Host";
+import adminSlice from './slice/Admin'
 
 const PersistConfig ={
     key:'root',
@@ -13,11 +14,13 @@ const PersistConfig ={
 
 const userPersistReducer = persistReducer(PersistConfig,user.reducer)
 const hostPersistReducer = persistReducer(PersistConfig,hostSlice)
+const adminPersistReducer= persistReducer(PersistConfig,adminSlice)
 
 export const Store = configureStore({
     reducer: {
         User: userPersistReducer,
-        Host: hostPersistReducer
+        Host: hostPersistReducer,
+        Admin:adminPersistReducer
         
     },
     middleware:(getDefaultMiddleware) => 

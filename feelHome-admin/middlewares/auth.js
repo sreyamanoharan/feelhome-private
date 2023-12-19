@@ -15,6 +15,7 @@ export const generateToken= (id,role)=> {
 export const verifyUserToken=async(req,res,next)=>{
         try{
             let token = req.headers.authorization
+            console.log(token,'here is the tokennnn......');
             if(!token){
                 console.log('token illa ughh')
                 return res.status(403).json({errmsg:'Access denied'})
@@ -45,28 +46,28 @@ export const verifyUserToken=async(req,res,next)=>{
 
         }
 
-    //    export const verifyAdminToken=async(req,res,next) => {
-    //       try{
-    //          let token = req.headers.authorization
-    //          if(!token){
-    //             return res.status(403).json({errmsg:'Access Denied'})
-    //          }
+       export const verifyAdminToken=async(req,res,next) => {
+          try{
+             let token = req.headers.authorization
+             if(!token){
+                return res.status(403).json({errmsg:'Access Denied'})
+             }
              
-    //         if(token.startsWith('Bearer')){
-    //             token = token.slice(7,token.length).trimLeft()
-    //          }
+            if(token.startsWith('Bearer')){
+                token = token.slice(7,token.length).trimLeft()
+             }
 
-    //          const verified = jwt.verify(token , SECRETCODE)
+             const verified = jwt.verify(token , SECRETCODE)
 
-    //          if(verified.role === 'admin'){
-    //             req.payload = verified
-    //             next()
-    //          }else{
-    //             return res.status(403).json({errmsg:'Access is denied'})
-    //          }
-    //       }catch(err){
-    //         console.log(err.message);
-    //         return res.status(500).json({errmsg:'Server error'})
-    //       }
+             if(verified.role === 'admin'){
+                req.payload = verified
+                next()
+             }else{
+                return res.status(403).json({errmsg:'Access is denied'})
+             }
+          }catch(err){
+            console.log(err.message);
+            return res.status(500).json({errmsg:'Server error'})
+          }
         
-    //     }
+        }

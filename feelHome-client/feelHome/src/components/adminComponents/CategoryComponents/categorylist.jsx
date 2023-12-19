@@ -111,7 +111,7 @@ const categorylist = () => {
 
   return (
    
-    <div style={{ background: 'white' }}>
+    <div className='bg-white h-screen'>
     <div style={{ textAlign: 'center' }}>
       <a
         style={{

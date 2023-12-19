@@ -23,7 +23,7 @@ const Banner =()=> {
   },[])
 
   return (
-    <div className='flex'>
+    <div className='sm:flex'>
     {banners.map(banner=>(
     <Carousel key={banner._id} className="rounded-xl">
    
@@ -38,14 +38,14 @@ const Banner =()=> {
             <Typography
               variant="h1"
               color="white"
-              className="mb-4 text-3xl md:text-4xl lg:text-5xl"
+              className="mb-4 text-3xl md:text-4xl lg:text-5xl break-words"
             >
              {banner.mainHeading}
             </Typography>
             <Typography
               variant="lead"
               color="white"
-              className="mb-12 opacity-80"
+              className="mb-12 opacity-80 break-words"
             >
              {banner.description}
             </Typography>

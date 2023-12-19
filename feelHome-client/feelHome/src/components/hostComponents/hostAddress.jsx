@@ -77,7 +77,8 @@ const hostAddress = () => {
        required/>
     </div>
    
-    <div className='mt-12'>
+    <div className='mt-12 flex w-full justify-between'>
+    <button onClick={()=>navigate(-1)} className='bg-black text-white px-4 py-2'>Back</button>
     <button type='submit' className='bg-black text-white px-4 py-2'>Next</button>
     </div>
   </form>

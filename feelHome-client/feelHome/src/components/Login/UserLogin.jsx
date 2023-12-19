@@ -3,7 +3,7 @@ import { Toaster,toast } from 'react-hot-toast'
 import {useNavigate} from 'react-router-dom'
 import axiosInstance from '../../api/axios'
 import {useDispatch} from 'react-redux'
-import {userLogin} from '../../store/slice/User'
+import {userLogin} from '../../../src/store/slice/User'
 
 function UserLogin() {
     const [email,setEmail] = useState('');
@@ -19,13 +19,14 @@ function UserLogin() {
       }else{
         axiosInstance.post('/userlogin',{email,password,reMail}).then((res)=>{
           if(res.data){
+            console.log(res.data);
             toast.success(res.data.message)
             const name=res.data.name
             const token=res.data.token
             const role=res.data.role
             const userId=res.data.userId
             dispatch(userLogin({name,token,role,userId}))
-            navigate('/home')
+            navigate('/')
             console.log('here===');
           }else{
            if(res.status==400){
@@ -33,10 +34,10 @@ function UserLogin() {
            }
           }
         }).catch ((err)=>{
-          if(err?.response.status === 401){
+          if(err?.res?.status === 401){
             setRemail(true)
-            toast.error(err?.response.data.errmsg)
-          }else if(err?.response?.status === 500){
+            toast.error(err?.res.data.errmsg)
+          }else if(err?.res?.status === 500){
             console.log("err")
           }else if(err?.response?.data){
             toast.error(err?.response?.data?.errmsg)
@@ -52,7 +53,7 @@ function UserLogin() {
   
     <div className="min-h-screen flex items-center justify-center bg-cover bg-center" style={{backgroundImage: "url('/public/image/homestay.jpg')"}}>
     <div className="relative flex flex-col justify-center min-h-screen overflow-hidden ">
-    <div className="w-full p-6 m-auto bg-white rounded-md shadow-md lg:max-w-xl p-65">
+    <div className=" p-6 m-auto bg-white rounded-md shadow-md w-[100%] md:w-96 ">
         <h1 className="text-3xl font-semibold text-center text-purple-700 underline">
            Log in
         </h1>

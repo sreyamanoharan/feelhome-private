@@ -9,10 +9,12 @@ const HostProps = () => {
   const navigate = useNavigate();
 
   const userId=useSelector(state=>state.User.userId)
+  const token=useSelector(state=>state.User)
 
   useEffect(() => {
     axiosInstance.get(`/host/getData/${userId}`)
       .then((res) => {
+        console.log(res.data);
         setDatas(res.data.hostData);
         console.log(res.data.hostData, 'getHostData');
       })

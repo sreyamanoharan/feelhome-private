@@ -35,6 +35,7 @@ export const sendMessage=async(req,res)=>{
 
 export const allMessages = async (req, res) => {
     try {
+        console.log("ooooooooooooooooooooooooooooooooooooooooo");
         const chatId = req.params.chatId;
         console.log(chatId, "this is chatId");
 

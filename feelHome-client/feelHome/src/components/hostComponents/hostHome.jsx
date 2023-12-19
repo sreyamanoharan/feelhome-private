@@ -4,17 +4,17 @@ import map from '../../../src/images/map.png'
 
 const hostHome = () => {
   return (
-    <>
-    <div className='bg-white flex'>
-   <div className='bg-white flex w-full h-screen justify-end items-center' >
+  <>
+  <div className='bg-white flex'>
+  <div className='bg-white flex w-full h-screen justify-end items-center' >
 
-   <div className='bg-white w-72 h-24'>
+  <div className='bg-white w-72 h-24'>
 
-   <p className='text-center text-4xl text-red-600'> feelHome</p>
-   <p className='text-center text-3xl text-black mt-1'>You can earn...</p>
-   </div>
-   </div>
-   <div className='bg-white w-full h-screen flex items-center' >
+  <p className='text-center text-4xl text-red-600'> feelHome</p>
+  <p className='text-center text-3xl text-black mt-1'>You can earn...</p>
+  </div>
+  </div>
+  <div className='bg-white w-full h-screen flex items-center' >
 
   
    <img className='bg-orange-400 h-5/6 w-9/12' src={map}/>

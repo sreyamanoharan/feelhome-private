@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
 
 export const user = createSlice({
@@ -8,7 +8,7 @@ export const user = createSlice({
         role:null,
         token: null,
         userId: null,
-        // isBlocked: false,
+        isBlocked: false,
     },
     reducers:{
         userLogin:(state,action)=>{
@@ -17,9 +17,9 @@ export const user = createSlice({
             state.token = action.payload.token
             state.userId = action.payload.userId
         },
-        // userBlock:(state,action)=>{
-        //     state.isBlocked = action.payload.isblocked
-        // },
+        userBlock:(state,action)=>{
+            state.isBlocked = action.payload.isblocked
+        },
         userLogout:(state,action)=>{
               
              state.name = null
@@ -30,5 +30,5 @@ export const user = createSlice({
     }
 })
 
-export const {userLogin,userLogout} = user.actions
+export const {userLogin,userLogout,userBlock} = user.actions
 export default user.reducer

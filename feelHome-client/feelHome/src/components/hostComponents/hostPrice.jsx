@@ -28,7 +28,8 @@ const hostPrice = () => {
     <div className="text-xl font-bold text-green-600 shadow mt-2 shadow-gray-400 rounded-md">₹<input type='number' id="price" className='outline-none p-2 rounded-md bg-white w-28' placeholder='Amount' value={price} onChange={(e) => setPrice(e.target.value)}/></div> 
   
     </div>
-    <div className='mt-10'>
+    <div className='mt-10 flex gap-16'>
+    <button onClick={()=>navigate(-1)} className='bg-black text-white px-4 py-2'>Back</button>
     <button onClick={async ()=>{
       await handleSubmit()
     }} className='bg-black text-white px-4 py-2'>Next</button>

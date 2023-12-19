@@ -119,9 +119,10 @@ const handleLocationSuggestion = async (query) => {
   </progress>
   
 
-  
-    <div className='mt-12'>
-    <button onClick={()=>reduxLocation(location)}  className='bg-black text-white px-4 py-2'>Next</button>
+ 
+    <div className='mt-12 '>
+    <button  onClick={()=>navigate(-1)}  className='bg-black text-white  px-4 py-2'>Back</button>
+    <button onClick={()=>reduxLocation(location)}  className='bg-black text-white px-4 ms-10 py-2'>Next</button>
     </div>
     </div>
 

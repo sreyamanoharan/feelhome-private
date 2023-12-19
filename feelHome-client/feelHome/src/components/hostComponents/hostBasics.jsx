@@ -124,16 +124,26 @@ const HostBasics = () => {
     <h2 className='text-3xl'>Share Some Basics About Your Place</h2>
       <ul className='mt-6'>
         {Object.keys(basics).map((item) => (
-          <li key={item} className='flex space-x-10'>
-            <h1>{item}</h1>
-            <button className='border-2 border-black p-1 ' onClick={() => handleDecrease(item)}>-</button>
+          <li key={item} className='w-full flex items-center justify-center gap-3'>
+            <div className='leading-10 w-24 '>
+              <h1>{item}</h1>
+            </div>
+            <div className='w-24 flex justify-center items-center'>
+              <button className='border-2 border-black p-1 ' onClick={() => handleDecrease(item)}>-</button>
+            </div>
+            <div className='w-24'>
+
              <p>{basics[item]} {item}</p>
+            </div>
+            <div className='w-24'>
+              
             <button className='border-2 border-black p-1 '  onClick={() => handleIncrease(item)}>+</button>
+            </div>
           </li>
         ))}
       </ul>
-      <div className='flex justify-center'>
-
+      <div className='flex justify-between px-24  '>
+        <button onClick={()=>navigate(-1)} className='bg-black p-2 m-8 text-white'>Back</button>
         <button onClick={reduxBasics} className='bg-black p-2 m-8 text-white'>Next</button>
       </div>
         </div>

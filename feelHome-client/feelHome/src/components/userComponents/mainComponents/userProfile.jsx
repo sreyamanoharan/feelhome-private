@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import axiosInstance from '../../../api/axios'
 import { toast } from 'react-hot-toast'
+import User_Detail from './User_Detail'
+
 
 
 
@@ -12,24 +14,21 @@ function User_profile() {
     const [change, setChange] = useState(false)
     const [edit, setEdit] = useState(false)
     const [name, setNewName] = useState('')
-    const [phone, setPhone] = useState('')
+    const [PhoneNumber, setPhoneNumber] = useState('')
     const [profileImage, setNewProfile] = useState('')
     const [err, setErr] = useState('')
     const regex_mobile = /^\d{10}$/
 
-
     useEffect(() => {
-        axiosInstance.get('//userProfile', {
-            headers: {
-                authorization: `Bearer ${token}`
-            }
-        }).then((res) => {
-            console.log(res?.data +'hereeee');
+        
+        axiosInstance.get('/userProfile').then((res) => {
+            console.log(res?.data + 'hereeeeeeeeeeeeeeeee');
             setUser(res?.data?.user)
             setNewName(res?.data?.user?.name)
-            setPhone(res?.data?.user?.phone)
+            setPhoneNumber(res?.data?.user?.PhoneNumber)
             setNewProfile(res?.data?.user?.profileImage)
-        
+
+
         }).catch((error) => {
             if (error.response.data) {
                 toast.error(error.response.data.errMsg)
@@ -43,17 +42,20 @@ function User_profile() {
         setErr('')
         if (name.trim().length == 0) {
             setErr("Fill all the fields")
-        } else if (regex_mobile.test(phone) == false) {
+        } else if (regex_mobile.test(PhoneNumber) == false) {
             setErr("Enter valid mobile number")
         } else {
-            axiosInstance.patch('/user/editProfile', { name, profileImage, phone }, {
+            axiosInstance.patch('/editProfile', { name, profileImage,PhoneNumber  }, {
                 headers: {
                     authorization: `Bearer ${token}`
                 }
-            }).then((res) => {
+            }).then((res)=>{
+
+                console.log(res.data,'lllllllllllll======lllllllllll');
                 toast.success(res.data.message)
                 setEdit(false)
                 setChange(!change)
+              
             }).catch((error) => {
                 console.log(error);
                 if (error?.response?.data) {
@@ -62,7 +64,9 @@ function User_profile() {
                     console.log(error.message);
                 }
             })
+
         }
+
     }
 
     function isValidImage(logo) {
@@ -89,10 +93,10 @@ function User_profile() {
     console.log("Props passed to User_Detail:", { user, setEdit });
 
     return (
-        <div className={`capitalize bg-[url()] min-h-screen bg-cover bg-fixed`}>
-                    { edit ?
+        <div className={`capitalize bg-[url()] min-h-screen bg-cover bg-fixed bg-white`}>
+            {edit ?
                 <>
-                    <div className="justify-center bg-transparent items-center flex overflow-x-hidden overflow-y-auto disableBar fixed inset-0 z-50 outline-none focus:outline-none">
+                    <div className="justify-center bg-transparent items-center flex overflow-x-hidden overflow-y-auto disableBar fixed inset-0 z-50 outline-none focus:outline-none ">
                         <div className="relative w-auto max-h-full my-6 mx-auto max-w-3xl">
                             {/*content*/}
                             <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
@@ -116,9 +120,9 @@ function User_profile() {
                                                         </div>
                                                     </div>
                                                     <div className="sm:col-span-3">
-                                                        <label className="block text-sm font-medium leading-6 text-gray-900">Phone</label>
+                                                        <label className="block text-sm font-medium leading-6 text-gray-900">PhoneNumber</label>
                                                         <div className="mt-2">
-                                                            <input type="text" onChange={(e) => setPhone(e.target.value)} placeholder={phone} name="last-name" id="last-name" className="block w-full p-1 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                                            <input type="text" onChange={(e) => setPhoneNumber(e.target.value)} placeholder={PhoneNumber} name="last-name" id="last-name" className="block w-full p-1 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                                         </div>
                                                     </div>
                                                     <div className=''>
@@ -155,22 +159,22 @@ function User_profile() {
                                     <button
                                         className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                         type="button"
-                                        onClick={() => { setEdit(false)}}>Close
+                                        onClick={() => { setEdit(false) }}>Close
                                     </button>
                                     <button
-                                        className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                        className="bg-emerald-500 text-black active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                         type="button"
-                                        onClick={() => { submitEdits()}}>Submit
+                                        onClick={() => { submitEdits() }}>Submit
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
-                    
-                </>:
-             
-                 <User_Detail user={user} setEdit={setEdit}  />
+
+                </> :
+
+                <User_Detail setEdit={setEdit} />
             }
         </div>
     )

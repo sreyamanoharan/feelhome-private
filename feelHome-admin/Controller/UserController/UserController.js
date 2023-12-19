@@ -164,6 +164,44 @@ export const login = async (req, res) => {
     console.log(error)
   }
 };
+export const loadProfile = async (req, res) => {
+  try {
+    const userId = req.payload.id
+    const user = await userCollection.findOne({ _id: userId })
+  
+   
+    return res.status(200).json({ user })
+  } catch (err) {
+    return res.status(500).json({ errmsg: "Server error" })
+  }
+}
+
+export const editProfile = async (req, res) => {
+  try {
+    console.log('edit your profile .........');
+    let { name, profileImage, PhoneNumber } = req.body;
+    console.log(req.body);
+    name = name.trim();
+    await userCollection.updateOne({ _id: req.payload.id }, { $set: { name, profileImage, PhoneNumber } });
+    return res.status(200).json({ message: "Profile updated successfully" });
+  } catch (err) {
+    return res.status(500).json({ errmsg: "Server Error" });
+  }
+};
+
+
+export const users=async(req,res)=>{
+  try {
+    let {userId}=req.params
+    console.log(userId,'9999999999999999999999999999');
+    const users=await userCollection.findById(userId)
+   console.log(users);
+    return res.status(200).json({users})
+  } catch (error) {
+    console.log(error);
+  }
+ 
+}
 
 
 

@@ -126,7 +126,7 @@ const bannerSubmit=async(id) =>{
 
   return (
     <>
-      <div style={{ background: 'white' }}>
+      <div style={{ background: 'white' }} className='h-full'>
         <div style={{ textAlign: 'center' }}>
           <a
             style={{

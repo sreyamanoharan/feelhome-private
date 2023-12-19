@@ -1,4 +1,3 @@
-
 import { generateToken } from '../../middlewares/auth.js';
 import adminCollection from '../../Models/AdminModel.js'
 export const adminlogin = async (req, res) => {
@@ -28,3 +27,5 @@ export const adminlogin = async (req, res) => {
       console.log(error)
     }
   };
+
+  

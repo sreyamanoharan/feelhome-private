@@ -59,7 +59,7 @@ import axios from 'axios';
     return (
       <>
         <div className='bg-white h-screen w-full flex flex-col justify-center items-center'>
-        <h1 className='text-black mt-3 text-3xl'>Add Some photos of your Property</h1>
+        <h1 className='text-black mt-3 text-3xl leading-loose'>Add Some photos of your Property</h1>
         <div>
         <input type="file" multiple onChange={handleImageUpload} />
       {/* Display redux images with previews */}
@@ -98,8 +98,9 @@ import axios from 'axios';
         <button className='bg-black p-2' onClick={async () => await handleImageSubmit()}>Submit Images</button>
           
         </div>
-        <div className='mt-12'>
-    <a onClick={()=>navigate('/host/hostFinish')} className='bg-black text-white px-4 py-2'>Next</a>
+        <div className='mt-12 flex gap-14'>
+    <button onClick={()=>navigate(-1)} className='bg-black text-white px-4 py-2'>Back</button>
+    <button onClick={()=>navigate('/host/hostFinish')} className='bg-black text-white px-4 py-2'>Next</button>
     </div>
       </div>
       </>

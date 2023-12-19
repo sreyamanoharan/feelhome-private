@@ -30,8 +30,9 @@ const hostStPlace = () => {
     <div className="h-px w-70/100 bg-black"></div>
   </div>
   
-    <div className='mt-12'>
-    <a onClick={()=>navigate('/host/hostAmenities')} className='bg-black text-white px-4 py-2'>Next</a>
+    <div className='mt-12 flex gap-16'>
+    <button onClick={()=>navigate(-1)} className='bg-black text-white px-4 py-2'>Back</button>
+    <button onClick={()=>navigate('/host/hostAmenities')} className='bg-black text-white px-4 py-2'>Next</button>
     </div>
     </div>
     </>

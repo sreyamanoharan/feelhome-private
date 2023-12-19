@@ -6,7 +6,7 @@ import adminRouter from './Routes/AdminRoute.js';
 import hostRouter from './Routes/HostRoute.js';
 import chatRouter from './Routes/ChatRoute.js';
 import jwt from 'jsonwebtoken'
-import { Server } from 'socket.io';
+import { Server, Socket } from 'socket.io';
 import messageRoute from './Routes/messageRoute.js';
 
 const app = express();
@@ -50,10 +50,35 @@ const io=new Server(server,{
   }
 })
 
+
 io.on("connection",(socket)=>{
-  console.log("conncted to socket.io");
+  // console.log("conncted to socket.io");
+
+
   socket.on('setup',(userId)=>{
+
     socket.join(userId)
+    // console.log("conncted to socket.io");
     socket.emit("connected")
   })
+  
+
+  socket.on('join chat',(room)=>{
+    socket.join(room)
+    console.log("user joined room",room);
+  })
+
+  socket.on('new message',(newMessageRecieved)=>{
+   
+    var chat=newMessageRecieved?.chatId
+    // console.log(chat,"==========")
+    if(!chat?.User) return console.log("chat not found");
+    chat.User.forEach((user)=>{
+      
+      if(user._id==newMessageRecieved.sender._id) return
+      socket.in(user._id).emit("message received",newMessageRecieved)
+      
+    })
+  })
 })
+

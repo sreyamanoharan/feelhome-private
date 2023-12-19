@@ -2,12 +2,16 @@ import React from 'react'
 import  { useState} from 'react'
 import axiosInstance from '../../api/axios'
 import {useNavigate} from 'react-router-dom'
+import {useDispatch} from 'react-redux'
+import { adminLogin } from '../../store/slice/Admin'
 
 const AdminLogin = () => {
-    const navigate = useNavigate()
+ 
 
     const [email,setEmail]=useState('')
     const [password,setPassword]=useState('')
+    const dispatch=useDispatch()
+    const navigate = useNavigate()
 
     async function handleLogin(e){
         e.preventDefault()
@@ -15,13 +19,11 @@ const AdminLogin = () => {
     console.log(email,password,"fffffffffff");
     axiosInstance.post('/admin/adminlogin', {email,password}).then((res)=>{
       if(res.data){
-      
-        const name=res.data.name
-        const token=res.data.token
-        const role=res.data.role
-        const userId=res.data.userId
-      
-        navigate('/admin/addBanner')
+         const name=res.data.name
+         const token=res.data.token
+         const role=res.data.role
+         dispatch(adminLogin({name,token,role}))
+        navigate('/admin/home')
         console.log('here===');
       }else{
        if(res.status==400){

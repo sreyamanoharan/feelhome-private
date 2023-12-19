@@ -1,10 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {useNavigate} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import axiosInstance from '../../api/axios';
 import { reduxClear } from '../../store/slice/Host';
+import Confetti from 'react-dom-confetti';
 
 const hostFinal = () => {
+  const config = {
+    angle: 90,
+    spread: 360,
+    startVelocity: 40,
+    elementCount: 500,
+    dragFriction: 0.12,
+    duration: 3000,
+    stagger: 3,
+    width: "20px",
+    height: "20px",
+    perspective: "700px",
+    colors: ["#000", "#333", "#666"]
+  };
   const navigate= useNavigate()
   const dispatch=useDispatch()
 
@@ -14,12 +28,15 @@ const hostFinal = () => {
   console.log(userName);
   console.log(hostData,userEmail,'here is the hostDatasssssss');
 
-
+    const [happy,setHappy]=useState(false)
     const handleSubmit = async () => {
       
       await axiosInstance.post('/host/postData',{hostData,userEmail})
       dispatch(reduxClear({}))
-      navigate('/host/hostHome')
+      setHappy(true)
+      setTimeout(() => {
+        // navigate('/host/hostHome')
+      }, 5000);
     }
 
   return (
@@ -39,7 +56,9 @@ const hostFinal = () => {
 </div>
 
 <div className='mt-12 cursor-pointer'>
-    <button onClick={handleSubmit} className='bg-black text-white px-4 py-2'>Ok</button>
+    <button onClick={handleSubmit} className='bg-black text-white px-4 py-2'>go back to home</button>
+    {/* <Confetti  active={true}  config={ config }/> */}
+    <Confetti active={ happy } />
     </div>
 </div>
 

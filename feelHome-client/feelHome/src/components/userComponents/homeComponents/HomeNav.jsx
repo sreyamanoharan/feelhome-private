@@ -9,6 +9,7 @@ import {MdMeetingRoom} from 'react-icons/md'
 
 
 const HomeNav = () => {
+
   return (
     <div>
     <div>
@@ -35,7 +36,7 @@ const HomeNav = () => {
   <div className="navbar-center hidden lg:flex">
   <ul className="menu menu-horizontal px-1">
     <li>
-      <a className="text-black hover:bg-gray-600 hover:text-white text-opacity-60 dark:text-opacity-80  transition-colors duration-300">
+      <a className="text-black hover:bg-gray-600 hover:text-white text-opacity-60 dark:text-opacity-80  transition-colors duration-300 } ">
         <GiTreehouse />Treehouse
       </a>
     </li>

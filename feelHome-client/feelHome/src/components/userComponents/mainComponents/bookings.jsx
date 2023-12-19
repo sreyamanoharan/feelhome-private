@@ -6,9 +6,29 @@ import { useSelector } from 'react-redux'
 const bookings = () => {
 
 const [booking,setBooking]=useState([])
+const [cancellationLoading, setCancellationLoading] = useState(false);
+const [modalOpen, setmodalOpen] = useState(false)
+const [bookingId,setBookingId]=useState(null)
 
 const userId=useSelector(state=>state.User.userId)
 console.log(userId);
+
+const handleCancelBooking = async () => {
+
+  console.log(bookingId,'===bookinggggIdddddd====');
+  try {
+    setCancellationLoading(true);
+    // Make an API call to cancel the booking
+    const response = await axiosInstance.post(`/cancel-booking/${bookingId}`);
+    // Handle the response, show a success message, update the UI, etc.
+    console.log(response.data);
+  } catch (error) {
+    // Handle errors, show error messages, etc.
+    console.error(error);
+  } finally {
+    setCancellationLoading(false);
+  }
+};
 
 
 useEffect(()=>{
@@ -18,7 +38,10 @@ useEffect(()=>{
        } 
     })
   
-},[])
+},[cancellationLoading])
+
+
+
 console.log(booking);
 
 
@@ -80,7 +103,12 @@ console.log(booking);
       </td>
      
       <th>
-        <button className="btn btn-ghost btn-xs text-black">Cancel Booking</button>
+      <button
+        onClick={() =>{setBookingId(data._id), setmodalOpen(true)} }
+        disabled={cancellationLoading}
+      >
+        {cancellationLoading ? 'Cancelling...' : 'Cancel Booking'}
+      </button>
       </th>
     </tr>
   
@@ -89,6 +117,37 @@ console.log(booking);
   </tbody> 
     
   </table>
+
+
+
+  {modalOpen && (
+          <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50 z-50">
+            <div className="bg-white text-black font-semibold p-8 rounded-lg shadow-md text-center">
+              <h1 className="text-xl font-semibold mb-4"></h1>
+               <p>Are you sure you want to cancel booking?</p>
+
+             
+            
+
+              <div className='flex - justify-center space-x-4 items-center mt-8' >
+            
+                <button
+                  className="btn btn-secondary bg-red-500 text-white hover:bg-red-600"
+                   onClick={() => {handleCancelBooking(),setmodalOpen(false)}}
+                >
+                Yes
+                </button>
+                <button
+                  className="btn btn-secondary bg-red-500 text-white hover:bg-red-600"
+                   onClick={() => setmodalOpen(false)}
+                >
+                 No
+                </button>
+              </div>
+
+            </div>
+          </div>
+        )}
 </div>
 
    

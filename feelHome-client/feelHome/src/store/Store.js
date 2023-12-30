@@ -1,7 +1,7 @@
 import {configureStore} from "@reduxjs/toolkit";
 import {persistStore,persistReducer,FLUSH,REHYDRATE,PERSIST,PURGE,REGISTER, PAUSE} from 'redux-persist'
 import storage from "redux-persist/lib/storage"
-import userSlice from './slice/user'
+import {user} from './slice/User'
 // import { Admin } from "./slice/admin";
 import hostSlice from "./slice/Host";
 import adminSlice from './slice/Admin'
@@ -12,7 +12,7 @@ const PersistConfig ={
 }
 
 
-const userPersistReducer = persistReducer(PersistConfig,userSlice)
+const userPersistReducer = persistReducer(PersistConfig,user.reducer)
 const hostPersistReducer = persistReducer(PersistConfig,hostSlice)
 const adminPersistReducer= persistReducer(PersistConfig,adminSlice)
 

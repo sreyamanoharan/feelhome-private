@@ -1,0 +1,13 @@
+
+# feelHome-admin specific
+feelHome-admin/node_modules/
+
+# feelHome-client specific
+feelHome-client/node_modules/
+
+
+
+# dotenv environment variables file
+feelHome-admin/.env
+
+

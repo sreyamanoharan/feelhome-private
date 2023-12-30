@@ -12,7 +12,7 @@ const adminNav = () => {
 
   return (
     <>
-      <div className="drawer lg:drawer-open">
+      <div className="drawer lg:drawer-open bg-white h-screen">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col ">
           {/* Page content here */}
@@ -22,7 +22,7 @@ const adminNav = () => {
         </div>
         <div className="drawer-side">
           <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
-          <ul className="menu p-4 w-80 min-h-full bg-blue-gray-900 text-base-content ">
+          <ul className="menu p-4 w-80 min-h-full bg-blue-gray-900 text-gray-900 t ">
             {/* Sidebar content here */}
             
             <li className='mt-28'><button  onClick={()=>navigate('/admin/home')} className="text-lg font-bold">Dashboard</button></li>
@@ -30,7 +30,7 @@ const adminNav = () => {
             <li><button  onClick={()=>navigate('/admin/categoryList')} className="text-lg font-bold">Category Management</button></li>
             <li><button  onClick={()=>navigate('/admin/MainFeature')} className="text-lg font-bold">Feature Management</button></li>
             <li><button  onClick={()=>navigate('/admin/MainBanner')} className="text-lg font-bold">Banner Management</button></li>
-            <button className='bg-white text-black mt-32 w-40 h-8 rounded' onClick={()=>{dispatch(adminLogout()) ,navigate('/admin/adminLogin')}}>Log Out</button>
+            <button className='text-white bg-gray-900 mt-32 w-40 h-8 rounded' onClick={()=>{dispatch(adminLogout()) ,navigate('/admin/adminLogin')}}>Log Out</button>
           </ul>
          
         </div>

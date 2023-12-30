@@ -1,4 +1,4 @@
-import admin from '../../Models/AdminModel.js';
+import admin from '../../Models/AdminModel.js'
 import hostModel from '../../Models/HostModel.js'
 import userModel from '../../Models/UserModel.js'
 import rentModel from '../../Models/RentModel.js';
@@ -43,7 +43,7 @@ export const createCheckoutSession = async (req, res) => {
                 }
             ]
         })
-        console.log(existingBooking,"existingBooking");
+      
         if (existingBooking) {
          
             res.status(409).json({ errMsg: 'This date is already booked' })
@@ -115,12 +115,13 @@ export const paymentSuccess = async (req, res) => {
       const walletHistoryHost = {date:new Date(),amount:priceHost,from:userId,transactionType:'Credit'}
       const walletHistoryAdmin = {date:new Date(),amount:priceAdmin,from:userId,transactionType:'Credit'}
       const host = await hostModel.findOne({_id:propertyId})
-      console.log("vvv",host)
+     
       const updateHost = await userModel.updateOne({_id:host.hostId},
         {$inc:{wallet:priceHost},$push:{walletHistory:walletHistoryHost}})
       
-        const updateAdmin = await admin.updateOne({phone:process.env.ADMIN_EMAIL},
+        const updateAdmin = await admin.updateOne({email:process.env.ADMIN_EMAIL},
         {$inc:{wallet:priceAdmin},$push:{walletHistory:walletHistoryAdmin}})
+       
 
       return updateHost && updateAdmin && res.redirect(`${FRONTEND_URL}paymentSuccess/${load}`)
 
@@ -135,9 +136,10 @@ export const paymentSuccess = async (req, res) => {
   export const booking=async (req,res)=>{
        try {
         const userId=req.params.userId
-        console.log(userId);
+        // console.log(userId);
         const data=await rentModel.find({userId:userId}).populate('propertyId').populate('userId')
-        console.log(data);
+        console.log(data,'lllllllllllllllllll-------------------lllllllllllllllllllll--------------llllllll');
+
         res.status(200).json({data})
        } catch (error) {
         res.status(200).json({errmsg:'server down'})
@@ -173,3 +175,37 @@ export const paymentSuccess = async (req, res) => {
       console.log(error);
     }
   };
+
+
+export const getBookingNum=async(req,res)=>{
+    try {
+      const bookingNum=await rentModel.countDocuments()
+      console.log(bookingNum);
+      res.status(200).json({bookingNum})
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  
+
+  export const latestBookings=async(req,res)=>{
+    try {
+      const currentDate = new Date();
+      const currentYear = currentDate.getFullYear();
+      const currentMonth = currentDate.getMonth() + 1; 
+      const startDate = new Date(currentYear, currentMonth - 1, 1);
+      const endDate = new Date(currentYear, currentMonth, 0);
+      const newBookingsCount = await rentModel.countDocuments({
+        bookedAt: {
+          $gte: startDate,
+          $lte: endDate,
+        },
+      });
+  
+      console.log('Number of new bookings in the current month:', newBookingsCount);
+      res.status(200).json({ newBookingsCount });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  }

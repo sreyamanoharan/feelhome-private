@@ -29,25 +29,25 @@ const Navbar = () => {
 
       {/*start middle area  */}
       <div className='md:block hidden'>
-        <Link to='/host/hostHome' class="px-4 py-2 mr-4 bg-red-700 rounded text-white">Host your Home</Link>
-        <Link to='/bookings' class="px-4 py-2 mr-4 bg-red-700 rounded text-white">My Bookings</Link>
-        <Link to='/allProperties' class="px-4 py-2 mr-4 bg-red-700 rounded text-white">All Properties</Link>
-        <Link to='/userChat' class="px-4 py-2 mr-4 bg-red-700 rounded text-white">Chat</Link>
+        <Link to='/host/hostHome' className="px-4 py-2 mr-4 bg-red-700 rounded text-white">Host your Home</Link>
+        <Link to='/bookings' className="px-4 py-2 mr-4 bg-red-700 rounded text-white">My Bookings</Link>
+        <Link to='/allProperties' className="px-4 py-2 mr-4 bg-red-700 rounded text-white">All Properties</Link>
+        {/* <Link to='/userChat' className="px-4 py-2 mr-4 bg-red-700 rounded text-white">Chat</Link> */}
       </div>
       {/*end middle area  */}
       {/* <div className="flex-1">
     <a className="btn btn-ghost normal-case text-xl text-red-500">feelHome</a>
 
     </div>
-    <div class="">
+    <div className="">
   </div>
-  <div class="">
+  <div className="">
   </div>
-  <div class="">
+  <div className="">
   </div>
-  <div class="">
+  <div className="">
   </div>
-  <div class="">
+  <div className="">
   </div> */}
 
       <div className="flex-none md:block hidden">
@@ -82,10 +82,10 @@ const Navbar = () => {
           <img src={details?.profileImage} className='w-8 h-8 rounded-full ' />
           <h1>Profile</h1>
           </div>
-          <Link to='/host/hostHome' class="text-white">Host your Home</Link>
-          <Link to='/bookings' class="text-white">My Bookings</Link>
-          <Link to='/allProperties' class="text-white">All Properties</Link>
-          <Link to='/userChat' class="text-white">Chat</Link>
+          <Link to='/host/hostHome' className="text-white">Host your Home</Link>
+          <Link to='/bookings' className="text-white">My Bookings</Link>
+          <Link to='/allProperties' className="text-white">All Properties</Link>
+          <Link to='/userChat' className="text-white">Chat</Link>
           <h1 className='text-white' onClick={() => {dispatch(userLogout()),navigate('/userLogin')}} >Logout</h1>
           {/* </li> */}
         </ul>

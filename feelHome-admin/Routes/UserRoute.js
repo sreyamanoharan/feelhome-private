@@ -10,12 +10,13 @@ import { getCategory } from "../Controller/UserController/CategoryController.js"
 import { getFeature } from "../Controller/UserController/FeatureController.js";
 import { getType } from "../Controller/UserController/TypeController.js";
 import { getData, getDetails,latestProperties } from "../Controller/UserController/DataController.js";
-import { createCheckoutSession ,paymentSuccess,booking, cancelBooking} from "../Controller/UserController/BookingController.js";
+import { createCheckoutSession ,paymentSuccess,booking, cancelBooking, getBookingNum, latestBookings} from "../Controller/UserController/BookingController.js";
 // import { getPage } from "../Controller/PaginationController.js";
 import { loadProfile } from "../Controller/UserController/UserController.js";
 import { editProfile } from "../Controller/UserController/UserController.js";
 import {verifyUserToken} from '../middlewares/auth.js';
 import { users } from "../Controller/UserController/UserController.js";
+import { getUserNum,latestUsers } from '../Controller/UserController/UserController.js'
 
 
 userRouter.post('/register',ClientRegister)
@@ -37,7 +38,12 @@ userRouter.get('/userProfile',verifyUserToken,loadProfile);
 userRouter.patch('/editProfile',verifyUserToken, editProfile);
 userRouter.get('/latestProperties',latestProperties)
 userRouter.get('/getUser/:userId',users)
-// userRouter.get('/getPage',getPage)
+userRouter.get('/userNum',getUserNum)
+userRouter.get('/newUsers',latestUsers)
+userRouter.get('/bookingNum',getBookingNum)
+userRouter.get('/newBooking',latestBookings)
+userRouter.get('/latestUsers',latestUsers)
+
 
 
 

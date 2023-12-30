@@ -43,8 +43,8 @@ const hostAddress = () => {
   return (
     <>
     <div className='bg-white h-screen w-full flex flex-col justify-center items-center'>
-    <h1 className="text-black mt-3 text-3xl">Confirm your Address</h1>
-    <div className="bg-white p-4 rounded-lg shadow-lg">
+    <h1 className="text-gray-900 mt-3 text-3xl">Confirm your Address</h1>
+    <div className="text-gray-900 p-4 rounded-lg shadow-lg">
     <form onSubmit={reduxAddress}>
     <div className='mt-4 text-black' >
       <label htmlfor="name">Name  : </label>
@@ -78,8 +78,8 @@ const hostAddress = () => {
     </div>
    
     <div className='mt-12 flex w-full justify-between'>
-    <button onClick={()=>navigate(-1)} className='bg-black text-white px-4 py-2'>Back</button>
-    <button type='submit' className='bg-black text-white px-4 py-2'>Next</button>
+    <button onClick={()=>navigate(-1)} className='bg-gray-900 text-white px-4 py-2'>Back</button>
+    <button type='submit' className='bg-gray-900 text-white px-4 py-2'>Next</button>
     </div>
   </form>
   </div>

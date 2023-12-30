@@ -96,7 +96,7 @@ const mainFeature = () => {
   };
   return (
     <>
-    <div style={{ background: 'white' }}>
+    <div className='bg-[#f4f7fe] p-5 h-screen'>
     <div style={{ textAlign: 'center' }}>
       <a
         style={{
@@ -115,8 +115,8 @@ const mainFeature = () => {
 
     </div>
   
-    <div>
-      <table className="w-full mt-16 border border-red-500">
+    <div className='bg-white text-gray-900'>
+      <table className="w-full mt-16">
         <thead>
           <tr>
             <th className="px-4 py-2 text-black">Image</th>

@@ -97,8 +97,8 @@ const homeData = () => {
     <>
        <Toaster toastOptions={{ duration: 3000 }} />
       <div className='h-screen bg-white'>
-        <div class="text-center">
-          <h1 class="text-black text-3xl">All Properties</h1>
+        <div className="text-center">
+          <h1 className="text-black text-3xl">All Properties</h1>
         </div>
         <div className="mb-4">
         <label htmlFor="categoryFilter">Filter by Category:</label>
@@ -219,7 +219,7 @@ const homeData = () => {
         )}
        
       </div>
-      <div className='bg-white text-black flex justify-center '>
+      <div className='bg-white text-white flex justify-center '>
 
       <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={onPageChange} />
       </div>

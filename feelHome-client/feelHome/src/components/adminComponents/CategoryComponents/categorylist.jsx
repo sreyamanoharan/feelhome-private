@@ -111,7 +111,7 @@ const categorylist = () => {
 
   return (
    
-    <div className='bg-white h-screen'>
+    <div className='bg-[#f4f7fe] p-5 h-screen'>
     <div style={{ textAlign: 'center' }}>
       <a
         style={{
@@ -130,11 +130,11 @@ const categorylist = () => {
 
     </div>
   
-    <div>
-      <table className="w-full mt-16 border border-red-500">
+    <div className='bg-white text-gray-900'>
+      <table className="w-full mt-16 ">
         <thead>
           <tr>
-            <th className="px-4 py-2 text-black">Image</th>
+            <th className="px-4 py-2 text-black ">Image</th>
             <th className="px-4 py-2 text-black">Category Heading</th>
             <th className="px-4 py-2 text-black">Options</th>
           </tr>

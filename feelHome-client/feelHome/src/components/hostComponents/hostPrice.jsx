@@ -19,8 +19,8 @@ const hostPrice = () => {
     <div className='bg-white h-screen w-full flex flex-col justify-center items-center'>
     <div className='text-center'>
  
-    <h1 className='text-black mt-3 text-3xl'>Now set your place</h1>
-    <h3 className='text-black mt-8'>
+    <h1 className='text-gray-900 mt-3 text-3xl'>Now set your place</h1>
+    <h3 className='text-gray-900 mt-8'>
     you can change it anytime
     </h3>
     </div>
@@ -29,10 +29,10 @@ const hostPrice = () => {
   
     </div>
     <div className='mt-10 flex gap-16'>
-    <button onClick={()=>navigate(-1)} className='bg-black text-white px-4 py-2'>Back</button>
+    <button onClick={()=>navigate(-1)} className='bg-gray-900 text-white px-4 py-2'>Back</button>
     <button onClick={async ()=>{
       await handleSubmit()
-    }} className='bg-black text-white px-4 py-2'>Next</button>
+    }} className='bg-gray-900 text-white px-4 py-2'>Next</button>
     </div>
     </div>
  

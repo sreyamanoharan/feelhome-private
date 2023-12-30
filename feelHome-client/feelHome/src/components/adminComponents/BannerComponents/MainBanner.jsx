@@ -3,6 +3,7 @@ import axios from 'axios';
 import axiosInstance from '../../../api/axios';
 import { toast } from 'react-hot-toast';
 
+
 const MainBanner = () => {
 
   const [selectedFile, setSelectedFile] = useState(null);
@@ -126,7 +127,7 @@ const bannerSubmit=async(id) =>{
 
   return (
     <>
-      <div style={{ background: 'white' }} className='h-full'>
+      <div className='bg-[#f4f7fe] p-5 h-full'>
         <div style={{ textAlign: 'center' }}>
           <a
             style={{
@@ -144,8 +145,8 @@ const bannerSubmit=async(id) =>{
           </button>
         </div>
 
-        <div>
-        <table className="w-full mt-16 border border-red-500">
+        <div className='bg-white text-gray-900'>
+        <table className="w-full mt-16 ">
         <thead>
           <tr>
             <th className="px-4 py-2 text-black">Image</th>
@@ -245,3 +246,4 @@ const bannerSubmit=async(id) =>{
 };
 
 export default MainBanner;
+

@@ -34,6 +34,7 @@ const handleCancelBooking = async () => {
 useEffect(()=>{
     axiosInstance.get(`/booking/${userId}`).then((res)=>{
        if(res.data.data){
+        console.log(res.data.data,'ssssssssssssssuuuuuuuuuuuuuuuuuuuusssssssssssssss');
         setBooking(res.data.data)
        } 
     })
@@ -70,9 +71,10 @@ console.log(booking);
       </tr>
     </thead>
     <tbody>
+
     {booking.map((data,index)=>(
 
-       
+
       <tr>
       <th>
         <label>
@@ -83,7 +85,7 @@ console.log(booking);
         <div className="flex items-center gap-3">
           <div className="avatar">
             <div className="mask mask-squircle w-12 h-12">
-              <img src={data?.propertyId.images} alt="Avatar Tailwind CSS Component" />
+              <img src={data?.propertyId?.images[0]} alt="Avatar Tailwind CSS Component" />
             </div>
           </div>
           <div>
@@ -93,13 +95,13 @@ console.log(booking);
         </div>
       </td>
       <td>
-        {data.propertyId.selectedCategory}
+        {data?.propertyId?.selectedCategory}
       </td>
       <td>
         {data.Amount}
       </td>
       <td>
-        {data.propertyId.selectedLocation}
+        {data?.propertyId?.selectedLocation}
       </td>
      
       <th>

@@ -56,7 +56,7 @@ const HostType = () => {
       <Toaster toastOptions={{ duration: 3000 }} />
       <div className="bg-white h-screen w-full flex flex-col justify-center items-center">
         <div className="text-center">
-          <h1 className="text-black mt-3 text-3xl">
+          <h1 className="text-gray-900 mt-3 text-3xl">
             Which of these best describes your place
           </h1>
            
@@ -89,10 +89,10 @@ const HostType = () => {
           <div className="h-px w-70/100 bg-black"></div>
         </div>
         <div className="mt-12">
-        <button className="bg-black text-white px-4 py-2" onClick={()=>navigate("/host/hostPlace")}>
+        <button className="bg-gray-900 text-white px-4 py-2" onClick={()=>navigate("/host/hostPlace")}>
             back
           </button>
-          <button className="bg-black text-white ml-10 px-4 py-2" onClick={handleNextClick}>
+          <button className="bg-gray-900 text-white ml-10 px-4 py-2" onClick={handleNextClick}>
             Next
           </button>
         </div>

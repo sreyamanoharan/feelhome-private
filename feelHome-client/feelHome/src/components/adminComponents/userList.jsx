@@ -37,9 +37,18 @@ const userList = () => {
     <>
 
    
-     <div className='bg-white h-screen'>
-     <h1>User Management</h1>
-      <table className="w-full mt-16 border border-red-500">
+     <div className='bg-[#f4f7fe] p-5 h-screen  text-gray-900'>
+      <div style={{ textAlign: 'center'}}>
+      <a  style={{
+          color: 'black',
+          cursor: 'pointer',
+          fontSize: '24px',
+        }}>User Management</a>
+
+      </div>
+  
+  <div className='bg-white text-gray-900'>
+  <table className="w-full mt-16 ">
         <thead>
           <tr>
           <th className="px-4 py-2 text-black">Profile Image</th>
@@ -52,18 +61,18 @@ const userList = () => {
         {user.map((data,index) => (
           <tr key={data._id}> 
           <td className="px-4 py-2 text-center">
-                <img src={data?.profileImage} alt={data.profileImage}  width="100px" className="mx-auto"/>
+                <img src={data?.profileImage} alt={data.profileImage} width="100px" className="mx-auto max-h-24"/>
               </td>
               <td className="px-4 py-2 text-center text-black">{data.name}</td>
               <td className="px-4 py-2 text-center text-black">{data.email}</td>
               <td className="px-4 py-2 text-center text-black">
               {data.isBlocked === false ? (
                  
-                <button onClick={() => statusChange(data?._id, data?.isBlocked)}  className="btn btn-secondary">
+                <button onClick={() => statusChange(data?._id, data?.isBlocked)}  className="btn bg-[#6AD2FF] text-gray-900  hover:bg-[#6AD2FF]" >
                  Block
                 </button>
               ) : (
-                <button onClick={() => statusChange(data._id, data.isBlocked)} className="btn btn-primary">
+                <button onClick={() => statusChange(data._id, data.isBlocked)} className="btn bg-[#4318FF] text-gray-900  hover:bg-[#4318FF]">
                   Unblock
                 </button>
               )}
@@ -73,6 +82,9 @@ const userList = () => {
         ))}
         </tbody>
       </table>
+
+  </div>
+     
     
     </div>
     </>

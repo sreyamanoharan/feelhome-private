@@ -22,7 +22,8 @@ const rentSchema=new mongoose.Schema({
     },
     bookedAt:{
         type:Date
-    }
+    },
+    
   
 
 })

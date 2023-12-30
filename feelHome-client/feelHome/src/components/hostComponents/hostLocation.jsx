@@ -64,7 +64,7 @@ const handleLocationSuggestion = async (query) => {
 
     <div className='text-center'>
     
-      <h1 className='text-black mt-3 text-3xl'>Where is your place Located?</h1>
+      <h1 className='text-gray-900 mt-3 text-3xl'>Where is your place Located?</h1>
       <div className='w-full '>
       <div className='flex justify-center mt-8 h-80 w-full' style={{backgroundImage:'url("./../../../src/images/map.png")'}}>
       <div className='w-80 flex md:grid-cols-2 gap-6 justify-center'>
@@ -121,8 +121,8 @@ const handleLocationSuggestion = async (query) => {
 
  
     <div className='mt-12 '>
-    <button  onClick={()=>navigate(-1)}  className='bg-black text-white  px-4 py-2'>Back</button>
-    <button onClick={()=>reduxLocation(location)}  className='bg-black text-white px-4 ms-10 py-2'>Next</button>
+    <button  onClick={()=>navigate(-1)}  className='bg-gray-900 text-white  px-4 py-2'>Back</button>
+    <button onClick={()=>reduxLocation(location)}  className='bg-gray-900 text-white px-4 ms-10 py-2'>Next</button>
     </div>
     </div>
 

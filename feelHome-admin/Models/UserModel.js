@@ -49,7 +49,11 @@ const UserSchema = new mongoose.Schema({
             type: String,
             enum: ['Credit', 'Debit'],
         }
-    }]
+    }],
+    registrationDate: {
+        type: Date,
+        default: Date.now(),
+    }
 
 });
 

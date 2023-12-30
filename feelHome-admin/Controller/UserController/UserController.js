@@ -13,7 +13,7 @@ import {ObjectId} from 'mongoose';
 
 export const sendVerifyMail = async ( name,email,userId) => {
      try {
-        console.log("hello000000000000000000000000000000000000",email)
+    
         const transporter = nodemailer.createTransport({
                          host: 'smtp.gmail.com',
                          port: 465,
@@ -61,8 +61,8 @@ export const sendVerifyMail = async ( name,email,userId) => {
      if (expirationTime > new Date()) {
     
       const { userId } = req.params;
-      console.log("fbsmfbsmvsmfvsm");
-      console.log(expirationTime,'kkkkkkkkkkkk');
+     
+     
       await userCollection.updateOne({ _id: userId }, { $set: { isVerified: true } });
       res.status(200).json({ message: 'Email verified successfully'});
      }
@@ -84,7 +84,7 @@ export const resendMail=async (req,res)=>{
     
     const { userId } = req.body;
     const user = await userCollection.findOne({ _id: userId });
-      console.log('you are hereeeeeeee bbbbb', userId,user);
+
       if(user){
         sendVerifyMail(user.name,user.email,userId)
         res.status(200).json({ message: 'Verification email has been resent.' });
@@ -203,6 +203,43 @@ export const users=async(req,res)=>{
  
 }
 
+
+export const getUserNum=async(req,res)=>{
+  try {
+    const num=await userCollection.countDocuments()
+    console.log(num);
+    res.status(200).json({num})
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const latestUsers = async (req, res) => {
+  try {
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth() + 1; // Month is zero-based, so add 1
+
+    // Start of the current month
+    const startDate = new Date(currentYear, currentMonth - 1, 1);
+
+    // End of the current month
+    const endDate = new Date(currentYear, currentMonth, 0);
+
+    const num = await userCollection.countDocuments({
+      registrationDate: {
+        $gte: startDate,
+        $lte: endDate,
+      },
+    });
+        
+    console.log('Number of users in the current month:', num);
+    res.status(200).json({num})
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
 
 
 

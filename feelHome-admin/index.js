@@ -29,7 +29,7 @@ app.use('/chat',chatRouter)
 app.use('/message',messageRoute)
 
 
-mongoose.connect('mongodb+srv://sreyampk:sreyasree@winkel.fmum0jr.mongodb.net/feelHome').then(result=>{
+mongoose.connect(process.env.MONGO_URI).then(result=>{
   console.log('mongo db connected');
 }).catch(err=>{
   console.log(err);

@@ -5,7 +5,8 @@ const EMAIL_PASS = process.env.EMAIL_PASS;
 
 import nodemailer from 'nodemailer';
 import sha256 from 'sha256';
-const FRONTENDURL =   'http://localhost:4000/'
+// const FRONTENDURL =   'http://localhost:4000/'
+const FRONTENDURL =   'https://feelhome-private.vercel.app/'
 import {ObjectId} from 'mongoose';  
 
 

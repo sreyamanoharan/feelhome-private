@@ -45,7 +45,8 @@ import { Store } from '../store/Store';
 
 import axios from "axios"
 
-const baseURL = 'http://localhost:3000/'
+// const baseURL = 'http://localhost:3000/'
+const baseURL = 'https://feelhome.winkell.store/'
 const axiosInstance = axios.create({
   baseURL: baseURL
 })

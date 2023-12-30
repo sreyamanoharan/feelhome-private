@@ -14,7 +14,8 @@ const UserChat = ({ role }) => {
   const scrolldownRef = useRef(null);
   const userId = useSelector((state) => state.User.userId);
 
-  let socket = io('http://localhost:3000/');
+  // let socket = io('http://localhost:3000/');
+  let socket = io('https://feelhome.winkell.store/');
 
   useEffect(() => {
     socket.emit('setup', userId);

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { userLogout } from '../../../store/slice/user'
+import { userLogout } from '../../../store/slice/User'
 import { useNavigate, Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import axiosInstance from '../../../api/axios'

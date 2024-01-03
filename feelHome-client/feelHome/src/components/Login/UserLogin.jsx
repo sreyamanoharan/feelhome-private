@@ -51,7 +51,7 @@ function UserLogin() {
     <Toaster toastOptions={{duration:3000}}/>
     <div>
   
-    <div className="min-h-screen flex items-center justify-center bg-cover bg-center" style={{backgroundImage: "url('/public/images/homestay.jpg')"}}>
+    <div className="min-h-screen flex items-center justify-center bg-cover bg-center" style={{backgroundImage: "url('/public/static/image/homestay.jpg')"}}>
     <div className="relative flex flex-col justify-center min-h-screen overflow-hidden ">
     <div className=" p-6 m-auto bg-white rounded-md shadow-md w-[100%] md:w-96 ">
         <h1 className="text-3xl font-semibold text-center text-purple-700 underline">

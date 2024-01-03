@@ -41,7 +41,7 @@ const AdminLogin = () => {
     
     <div>
   
-    <div className="min-h-screen flex items-center justify-center bg-cover bg-center" style={{backgroundImage: "url('/public/image/homestay.jpg')"}}>
+    <div className="min-h-screen flex items-center justify-center bg-cover bg-center" style={{backgroundImage: "url('/public/static/image/homestay.jpg')"}}>
     <div className="relative flex flex-col justify-center min-h-screen overflow-hidden ">
     <div className="w-full p-6 m-auto bg-white rounded-md shadow-md lg:max-w-xl p-65">
         <h1 className="text-3xl font-semibold text-center text-purple-700 underline">

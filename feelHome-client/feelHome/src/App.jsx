@@ -62,7 +62,7 @@ function App() {
     <Route path="/paymentSuccess/:load" element={<ProtectedRoute><PaymentSuccess/></ProtectedRoute>}/>
     <Route path='/paymentFail' element={<ProtectedRoute><PaymentFail/></ProtectedRoute>}/>
     <Route path='/bookings' element={<ProtectedRoute><Bookings/></ProtectedRoute>}/>
-    {/* <Route path='/userChat' element={<ProtectedRoute><Chat role={'user'}/></ProtectedRoute>}/> */}
+    <Route path='/userChat' element={<ProtectedRoute><Chat role={'user'}/></ProtectedRoute>}/>
    
    
   

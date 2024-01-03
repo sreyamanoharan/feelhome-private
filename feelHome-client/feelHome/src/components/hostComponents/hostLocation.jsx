@@ -1,6 +1,6 @@
 import React from 'react'
 import {useNavigate} from 'react-router-dom'
-import map from './../../../src/images/map.png'
+import map from './../../../public/static/image/map.png'
 import { useState } from 'react'
 import axios from 'axios'
 import { addSelectedLocation } from '../../store/slice/Host'
@@ -66,7 +66,7 @@ const handleLocationSuggestion = async (query) => {
     
       <h1 className='text-gray-900 mt-3 text-3xl'>Where is your place Located?</h1>
       <div className='w-full '>
-      <div className='flex justify-center mt-8 h-80 w-full' style={{backgroundImage:'url("./../../../src/images/map.png")'}}>
+      <div className='flex justify-center mt-8 h-80 w-full' style={{backgroundImage:'url("./../../../public/static/image/map.png")'}}>
       <div className='w-80 flex md:grid-cols-2 gap-6 justify-center'>
       <div className="text-sm w-full relative">
      

@@ -32,7 +32,7 @@ const Navbar = () => {
         <Link to='/host/hostHome' className="px-4 py-2 mr-4 bg-red-700 rounded text-white">Host your Home</Link>
         <Link to='/bookings' className="px-4 py-2 mr-4 bg-red-700 rounded text-white">My Bookings</Link>
         <Link to='/allProperties' className="px-4 py-2 mr-4 bg-red-700 rounded text-white">All Properties</Link>
-        {/* <Link to='/userChat' className="px-4 py-2 mr-4 bg-red-700 rounded text-white">Chat</Link> */}
+        <Link to='/userChat' className="px-4 py-2 mr-4 bg-red-700 rounded text-white">Chat</Link>
       </div>
       {/*end middle area  */}
       {/* <div className="flex-1">

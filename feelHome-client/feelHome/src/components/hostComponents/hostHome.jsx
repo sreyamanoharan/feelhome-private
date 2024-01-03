@@ -1,6 +1,6 @@
 import React from 'react'
-import Home from '../../../src/images/HostHome.webp'
-import map from '../../../src/images/map.png'
+import Home from '../../../public/static/image/HostHome.webp'
+import map from '../../../public/static/image/map.png'
 
 
 

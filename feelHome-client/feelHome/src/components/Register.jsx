@@ -83,7 +83,7 @@ const Register = () => {
   return (
     <>
       <Toaster toastOptions={{ duration: 3000 }} />
-      <div className="min-h-screen flex items-center justify-center bg-cover bg-center" style={{ backgroundImage: "url('/image/homestay.jpg')" }}>
+      <div className="min-h-screen flex items-center justify-center bg-cover bg-center" style={{ backgroundImage: "url('/public/image/homestay.jpg')" }}>
         <div className="relative flex flex-col justify-center overflow-hidden ml-auto  w-1/3">
 
 

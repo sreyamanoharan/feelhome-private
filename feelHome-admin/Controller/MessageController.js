@@ -35,10 +35,8 @@ export const sendMessage=async(req,res)=>{
 
 export const allMessages = async (req, res) => {
     try {
-        console.log("ooooooooooooooooooooooooooooooooooooooooo");
+    
         const chatId = req.params.chatId;
-        console.log(chatId, "this is chatId");
-
         const messages = await Message.find({ chatId: new mongoose.Types.ObjectId(chatId) })
             .populate("sender", 'name')
             .populate('chatId')

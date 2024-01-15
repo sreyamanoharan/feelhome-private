@@ -68,12 +68,10 @@ export const getUserNum=async(req,res)=>{
     try {
       const currentDate = new Date();
       const currentYear = currentDate.getFullYear();
-      const currentMonth = currentDate.getMonth() + 1; // Month is zero-based, so add 1
+      const currentMonth = currentDate.getMonth() + 1; 
   
-      // Start of the current month
       const startDate = new Date(currentYear, currentMonth - 1, 1);
   
-      // End of the current month
       const endDate = new Date(currentYear, currentMonth, 0);
   
       const num = await userCollection.countDocuments({

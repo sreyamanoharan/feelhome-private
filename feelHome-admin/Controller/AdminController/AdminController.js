@@ -12,13 +12,14 @@ export const adminlogin = async (req, res) => {
     const admin = await adminCollection.findOne({
       $and: [{ email: email }, { password: password }],
     });
+    console.log(admin,"thisk ilsjffskjfl");
 
 
 
     const token = generateToken(admin, 'admin')
     res.status(200).json({
       message: "admin successfully login",
-      name: admin.name,
+      email: admin.email,
       adminId: admin._id,
       token,
       role: 'admin'
@@ -77,7 +78,7 @@ export const getGraphCategory = async (req, res) => {
 
       const currentYear = new Date().getFullYear();
 
-// Assign the aggregation result to a variable
+
 const graphCategory = await rent.aggregate([
   {
     $match: {

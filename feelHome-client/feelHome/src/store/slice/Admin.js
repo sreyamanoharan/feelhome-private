@@ -3,19 +3,19 @@ import { createSlice } from "@reduxjs/toolkit";
 export const Admin = createSlice({
     name:'adminAuth',
     initialState:{
-        name : null,
+        email : null,
         token: null,
         role : null,
     },
     reducers :{
         adminLogin:(state,action)=>{
-            state.name = action.payload.name,
+            state.email = action.payload.email,
             state.role = action.payload.role,
             state.token = action.payload.token
         },
 
         adminLogout:(state,action)=>{
-            state.name = null,
+            state.email = null,
             state.role = null,
             state.token = null
 

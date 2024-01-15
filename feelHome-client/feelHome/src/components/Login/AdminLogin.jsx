@@ -19,10 +19,11 @@ const AdminLogin = () => {
     console.log(email,password,"fffffffffff");
     axiosInstance.post('/admin/adminlogin', {email,password}).then((res)=>{
       if(res.data){
-         const name=res.data.name
+         const email=res.data.email
          const token=res.data.token
          const role=res.data.role
-         dispatch(adminLogin({name,token,role}))
+        
+         dispatch(adminLogin({email,token,role}))
         navigate('/admin/home')
         console.log('here===');
       }else{

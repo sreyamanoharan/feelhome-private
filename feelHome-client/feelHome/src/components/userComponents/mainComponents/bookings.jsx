@@ -18,12 +18,12 @@ const handleCancelBooking = async () => {
   console.log(bookingId,'===bookinggggIdddddd====');
   try {
     setCancellationLoading(true);
-    // Make an API call to cancel the booking
+   
     const response = await axiosInstance.post(`/cancel-booking/${bookingId}`);
-    // Handle the response, show a success message, update the UI, etc.
+
     console.log(response.data);
   } catch (error) {
-    // Handle errors, show error messages, etc.
+  
     console.error(error);
   } finally {
     setCancellationLoading(false);

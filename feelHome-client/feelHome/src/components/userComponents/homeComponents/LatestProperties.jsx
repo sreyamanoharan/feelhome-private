@@ -65,7 +65,7 @@ const LatestProperties = () => {
 
   return (
     <>
-      <div className='h-screen bg-white'>
+      <div className='h-full text-gray-900 bg-white '>
         <div className="text-center">
           <h1 className="text-gray-900 text-3xl p-5">Latest Properties</h1>
         </div>

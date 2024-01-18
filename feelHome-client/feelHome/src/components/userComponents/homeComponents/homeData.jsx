@@ -132,7 +132,7 @@ const homeData = () => {
 
 
 
-        <div className='bg-white gap-20 w-full flex flex-wrap justify-center p-9'>
+        <div className='bg-white text-gray-900 gap-20 w-full flex flex-wrap justify-center p-9'>
 
           {/* <div className="bg-white gap-3 w-full flex ml-9"> */}
           {currentItems.map((data, index) => (

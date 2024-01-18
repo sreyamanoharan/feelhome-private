@@ -106,9 +106,9 @@ const UserChat = ({ role }) => {
 
   return (
     <div>
-      <div className="min-w-full border rounded lg:grid lg:grid-cols-3 bg-white">
+      <div className="min-w-full border rounded lg:grid lg:grid-cols-3 bg-white mt-28 text-gray-900">
         <div className="border-r border-gray-300 lg:col-span-1">
-          <div className="overflow-auto h-[40rem]">
+          <div className="overflow-auto h-full">
             <div>
               <ul>
                 {chats?.map((obj) => (
@@ -131,7 +131,7 @@ const UserChat = ({ role }) => {
                         <div className="flex justify-between">
                           <span className="block ml-2 font-semibold text-gray-600"></span>
                         </div>
-                        <span className="block ml-2 text-sm text-gray-600">
+                        <span className="block ml-2 text-sm text-red-900">
                           {obj?.User[0]?.name}
                         </span>
                         <span className="block ml-2 text-sm text-gray-600">
@@ -158,7 +158,7 @@ const UserChat = ({ role }) => {
                     alt="username"
                   />
                 )}
-                <span className="block ml-2 text-white font-semibold">
+                <span className="block ml-2 text-gray-900 font-semibold">
                   {selectedUser?.User[0]?._id === userId
                     ? selectedUser?.User[1]?.name
                     : selectedUser?.User[0]?.name}

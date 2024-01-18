@@ -3,6 +3,8 @@ import beach from '../../../../src/images/beach.jpeg'
 import treehouse from '../../../../src/images/treehouse.png'
 import { Carousel, Typography} from "@material-tailwind/react";
 import axiosInstance from '../../../api/axios';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
 
 import { useSelector } from 'react-redux';
  
@@ -11,7 +13,7 @@ const Banner =()=> {
   const[banners,setBanners]= useState([])
   const userId = useSelector(state=>state.User.userId)
 
-  console.log('sreyaid',userId)
+
 
   useEffect(()=>{
     axiosInstance.get('/banners').then(res=>{
@@ -23,8 +25,14 @@ const Banner =()=> {
   },[])
 
   return (
-    <div className='sm:flex'>
-    {banners.map(banner=>(
+<>
+
+<div className='bg-white h-full mt-28'>
+<div className='mx-16 bg-white'>
+    <div className='lg:flex bg-white'>
+
+   
+      {banners.map(banner=>(
     <Carousel key={banner._id} className="rounded-xl">
    
       <div className="relative h-full w-full">
@@ -54,7 +62,14 @@ const Banner =()=> {
       </div>
     </Carousel>
     ))}
+
+      </div>
+   
     </div>
+
+</div>
+
+    </>
   );
 }
 

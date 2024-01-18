@@ -67,7 +67,7 @@ const LatestProperties = () => {
     <>
       <div className='h-screen bg-white'>
         <div className="text-center">
-          <h1 className="text-black text-3xl p-5">Latest Properties</h1>
+          <h1 className="text-gray-900 text-3xl p-5">Latest Properties</h1>
         </div>
         {/* <div className="mb-4">
           <label htmlFor="search">Search:</label>
@@ -78,10 +78,10 @@ const LatestProperties = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div> */}
-        <div className='bg-white gap-3 w-full flex ml-9 p-9'>
+        <div className='bg-white gap-3 w-full flex flex-wrap justify-center p-9'>
 
           {latestProperties.map((data, index) => (
-            <div className="card w-96 bg-base-100 shadow-xl mt-5" key={data._id}>
+            <div key={data._id} className="card w-72 sm:w-96 bg-white shadow-3xl mt-5 mx-2">
               {/* <figure className="px-10 pt-10">
               <img src={data.images} alt={data.selectedCategory} className="rounded-xl" />
             </figure> */}

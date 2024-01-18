@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { Toaster, toast } from 'react-hot-toast'
 import Pagination from './pagination';
 
-const ITEMS_PER_PAGE = 2
+const ITEMS_PER_PAGE = 3
 
 const homeData = () => {
   const { token } = useSelector((state) => state.User)
@@ -25,15 +25,16 @@ const homeData = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1)
   const [locationSearchTerm, setLocationSearchTerm] = useState('');
- 
 
   const filteredDatas = datas.filter((data) =>
-  data?.selectedCategory?.includes(categoryFilter) &&  data?.selectedCategory.toLowerCase().includes(searchTerm.toLowerCase())
+    (data?.selectedLocation?.toString().toLowerCase().includes(locationSearchTerm.toLowerCase())) &&
+    data?.selectedCategory?.includes(categoryFilter) &&
+    data?.selectedCategory.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
-);
 
 
- const onPageChange = (pageNumber) => {
+  const onPageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
@@ -41,18 +42,18 @@ const homeData = () => {
 
   const handleBooking = async (propertyId) => {
     console.log('hereee');
-  
+
     if (new Date() >= new Date(checkInDate) || checkInDate === checkOutDate || new Date() >= new Date(checkOutDate) || !checkInDate || !checkOutDate) {
       console.log('booking.........');
       toast.error("Enter correct dates");
     } else {
       console.log('booking.........');
-  
+
       axiosInstance.post('/create-checkout-session', { userId, propertyId, checkInDate, checkOutDate })
         .then((res) => {
           if (res.data.url) {
             window.location.href = res.data.url;
-          }else{
+          } else {
             toast.success('Booking successful!')
           }
         })
@@ -70,11 +71,11 @@ const homeData = () => {
 
 
   useEffect(() => {
-    axiosInstance.get('/getData',{
-      headers:{
-          authorization: `Bearer ${token}`
+    axiosInstance.get('/getData', {
+      headers: {
+        authorization: `Bearer ${token}`
       }
-  }).then((res) => {
+    }).then((res) => {
       setDatas(res.data.hostData)
     }).catch((err) => {
       console.log(err);
@@ -83,7 +84,7 @@ const homeData = () => {
 
   const handleCategoryFilter = (category) => {
     setCategoryFilter(category);
-    setSearchTerm(''); 
+    setSearchTerm('');
   };
   const indexOfLastItem = currentPage * ITEMS_PER_PAGE;
   const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
@@ -91,36 +92,51 @@ const homeData = () => {
 
   const totalPages = Math.ceil(filteredDatas.length / ITEMS_PER_PAGE);
 
- 
+
 
   return (
     <>
-       <Toaster toastOptions={{ duration: 3000 }} />
+      <Toaster toastOptions={{ duration: 3000 }} />
       <div className='h-screen bg-white'>
-        <div className="text-center">
-          <h1 className="text-black text-3xl">All Properties</h1>
-        </div>
-        <div className="mb-4">
-        <label htmlFor="categoryFilter">Filter by Category:</label>
-        <select
-          id="categoryFilter"
-          value={categoryFilter}
-          onChange={(e) => handleCategoryFilter(e.target.value)}
-        >
-          <option value="">All Categories</option>
-          {/* Add options for each unique category in your data */}
-          {Array.from(new Set(datas.map((data) => data.selectedCategory))).map((category) => (
-            <option key={category} value={category}>
-              {category}
-            </option>
-          ))}
-        </select>
-        </div>
-        <div className='bg-white gap-3 w-full flex ml-9'>
-       
-        <div className="bg-white gap-3 w-full flex ml-9">
-        {currentItems.map((data, index)  => (
-          <div className="card w-96 bg-base-100 shadow-xl mt-5" key={data._id}>
+   
+  <div className="flex justify-between items-center mb-4 mx-14 mt-28">
+    <div className="flex items-center my-2">
+      <label htmlFor="categoryFilter" className="text-gray-900 block border-gray-900"></label>
+      <select
+        id="categoryFilter"
+        value={categoryFilter}
+        onChange={(e) => handleCategoryFilter(e.target.value)}
+        className="block w-full py-2 px-3 border border-gray-700 rounded-md bg-white text-gray-900 focus:outline-none focus:ring focus:border-blue-300"
+      >
+        <option value="">All Categories</option>
+        {Array.from(new Set(datas.map((data) => data.selectedCategory))).map((category) => (
+          <option key={category} value={category}>
+            {category}
+          </option>
+        ))}
+      </select>
+    </div>
+    <div className="flex items-center my-2">
+      <label htmlFor="locationSearchTerm" className="text-gray-900 block"></label>
+      <input
+       placeholder='search the location'
+        type="text"
+        id="locationSearchTerm"
+        value={locationSearchTerm}
+        onChange={(e) => setLocationSearchTerm(e.target.value)}
+        className="w-full py-2 px-3 border border-gray-900 rounded-md bg-white text-gray-900 focus:outline-none focus:ring focus:border-blue-300"
+      />
+    </div>
+  </div>
+
+
+
+
+        <div className='bg-white gap-20 w-full flex flex-wrap justify-center p-9'>
+
+          {/* <div className="bg-white gap-3 w-full flex ml-9"> */}
+          {currentItems.map((data, index) => (
+            <div className="card w-96 bg-white shadow-3xl mt-5" key={data._id}>
               {/* <figure className="px-10 pt-10">
               <img src={data.images} alt={data.selectedCategory} className="rounded-xl" />
             </figure> */}
@@ -151,14 +167,14 @@ const homeData = () => {
                   )}
                   <button className="btn btn-primary" onClick={() => navigate(`/propertyDetails/${data._id}`)} >View Details</button>
                 </div>
-                
+
               </div>
             </div>
           ))}
-           </div>
+        </div>
         )
-      </div>
-       
+        {/* </div> */}
+
 
         {modalOpen && (
           <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50 z-50">
@@ -195,7 +211,7 @@ const homeData = () => {
                   onChange={(e) => setNumGuests(e.target.value)}
                 />
               </div>
-              
+
 
               <div className='flex - justify-center space-x-4 items-center mt-8' >
                 <button
@@ -217,15 +233,15 @@ const homeData = () => {
             </div>
           </div>
         )}
-       
+
       </div>
       <div className='bg-white text-white flex justify-center '>
 
-      <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={onPageChange} />
+        <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={onPageChange} />
       </div>
-     
+
     </>
-    
+
   )
 }
 

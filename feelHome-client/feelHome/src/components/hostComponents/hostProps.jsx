@@ -25,7 +25,7 @@ const HostProps = () => {
 
   return (
     <div className='h-screen bg-white'>
-      <div className='bg-white gap-3 w-full flex'>
+      <div className='bg-white gap-3 w-full flex px-16 py-10'>
         {datas.map((data, index) => (
           <div className="card w-96 bg-base-100 shadow-xl" key={data._id}>
             {/* <figure className="px-10 pt-10">

@@ -242,7 +242,125 @@ export const latestUsers = async (req, res) => {
   }
 };
 
+export const googleLogin = async (req, res) => {
+  try {
+    let { profile } = req.body;
+    const email = profile?.email;
+    const name = profile?.name;
+    const profileImage = profile?.picture;
+    const user = await userModel.findOne({ email: email });
+    if (!user) {
+      const newUser = await userModel.create({
+        email,
+        name,
+        profileImage,
+        isVerified: true,
+      });
+      const token = generateToken(newUser._id, "user");
+      res.status(200).json({
+        message: "User login successfully",
+        name: newUser.name,
+        userId: newUser._id,
+        token,
+        role: "user",
+      });
+    } else if (user.isBlocked) {
+      res.status(403).json({ errmsg: "user is blocked by admin" });
+    } else {
+      if (!user.isVerified) {
+        if (!user.profileImage) {
+          await userModel.updateOne({ email }, { $set: { profileImage, isVerified: true } });
+        } else {
+          await userModel.updateOne({ _id: user._id }, { $set: { isVerified: true } });
+        }
+        const token = generateToken(user._id, "user");
+        res.status(200).json({
+          message: "user login successfully",
+          name: user.name,
+          token,
+          userId: user._id,
+          role: "user",
+        });
+      } else {
+        if (!user.profileImage) {
+          await userModel.updateOne({ email }, { $set: { profileImage } });
+        }
+        const token = generateToken(user._id, "user");
+        res.status(200).json({
+          message: "user login successfully",
+          name: user.name,
+          token,
+          userId: user._id,
+          role: "user",
+        });
+      }
 
+    }
+  } catch (err) { }
+};
+
+
+const forgotPasswordMail = async (email, name, userId) => {
+  try {
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
+      auth: {
+        user: 'filmpluswebsite@gmail.com',
+        pass: EMAIL_PASS
+      },
+
+    });
+
+    const mailOptions = {
+      from: 'filmpluswebsite@gmail.com',
+      to: email,
+      subject: 'Forgot Password',
+      html: `<p>Hello ${name} Please click here <a href = "${FRONTENDURL}/resetPassword/${userId}">here</a>if you want't to reset your password</p>`
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log('email could not be sent', error.message);
+      } else {
+        console.log('email has been sent', info.response);
+      }
+    })
+
+  } catch (error) {
+    console.log(error);
+    console.log('error occured while sending mail')
+  }
+}
+
+export const forgotPassword = async (req, res) => {
+  try {
+    const { email } = req.body
+    const user = await userModel.findOne({ email })
+    if (user) {
+      forgotPasswordMail(email, user.name, user._id)
+      res.status(200).json({ message: 'Please check your mail' })
+    } else {
+      res.status(400).json({ errmsg: 'user not found' })
+    }
+
+  } catch (error) {
+    res.status(500).json({ errmsg: 'Server error' })
+
+  }
+}
+
+
+export const restPassword = async (req, res) => {
+  try {
+    const { userId, password } = req.body
+    await userModel.updateOne({ _id: userId }, { $set: { password: sha256(password + SALT) } })
+    res.status(200).json({ message: 'Password Changed' })
+  } catch (error) {
+    res.status(500).json({ errmsg: "Server error" })
+  }
+}
 
 
 export default {
@@ -250,5 +368,6 @@ export default {
   sendVerifyMail,
   verifyMail,
   login,
-  resendMail
+  resendMail,
+  googleLogin
 };

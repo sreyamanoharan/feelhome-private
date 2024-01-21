@@ -29,7 +29,7 @@ const hostHome = () => {
         <p></p>
       </div>
       <div className='bg-white w-full h-auto flex px-10'>
-        <img src={Home} className=''></img>
+        <img src={Home}></img>
         <div className='text-gray-900 px-12'>
 
           <p className='text-2xl font-bold mb-4'> Unlock Earning Opportunities with Your Property</p>
@@ -48,8 +48,7 @@ const hostHome = () => {
         <h1 className='text-2xl font-bold mb-4 text-center pt-10'>How It Works:</h1>
         <div className='px-12 pb-10 py-5'>
         <p>Craft Your Listing: Create an enticing listing that showcases the unique charm of your space. Let your property's personality shine through with captivating photos</p>
-        <p className='pt-4'>Effortless Hosting: Extend a warm welcome to your guests and ensure they have an unforgettable stay. Our platform streamlines communication, and our superhosts are ready to assist you every step of the way.</p>
-        <p className='pt-4'>Watch Your Earnings Grow: Relax as your earnings accumulate effortlessly. Our secure transaction process ensures that you receive payments promptly, letting you enjoy the fruits of your hosting success.</p>
+        <p className='pt-4'>Effortless Hosting: Extend a warm welcome to your guests and ensure they have an unforgettable stay. Our platform streamlines communication, and our support team is ready to assist you every step of the way.</p>
         </div>
 
       </div>

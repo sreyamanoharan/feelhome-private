@@ -4,11 +4,15 @@ import {useNavigate} from 'react-router-dom'
 import axiosInstance from '../../api/axios'
 import {useDispatch} from 'react-redux'
 import {userLogin} from '../../../src/store/slice/User'
+import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
+import GoogleLoginComponent from './GoogleLogin'
+
 
 function UserLogin() {
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [reMail,setRemail] = useState(false);
+    const [forgott,setForgott] = useState(false)
     const dispatch=useDispatch()
     const  navigate = useNavigate()
   
@@ -46,9 +50,62 @@ function UserLogin() {
       }
     }
 
+    const forgotPassword =()=>{
+      axiosInstance.post('/forgotPassword',{email}).then((res)=>{
+       toast.success(res.data.message)
+      }).catch((error)=>{
+       if(error.response.data.errmsg){
+         toast.error(error.response.data.errmsg)
+       }
+       
+      })
+   }
+ 
+   const googleSignup = async (credentialResponse) => {
+    console.log("hi");
+
+    const { credential } = credentialResponse;
+    console.log(credential);
+
+    if (credential) {
+        try {
+            const decode = jwtDecode(credential);
+            const Guser = {
+                name: decode.name,
+                email: decode.email,
+                password: decode.email.split("@")[0]
+            };
+            console.log("Guser", Guser);
+
+            const { data } = await axiosInstance.post("/Register", {
+                ...Guser,
+                isGoogle: true,
+            });
+
+            if (data) {
+                const GsignCheck = data.Guser.email;
+                const GaccessToken = data.Guser.username;
+
+                localStorage.setItem(
+                    "user",
+                    JSON.stringify(GaccessToken, GsignCheck)
+                );
+                navigate("/userhome");
+            }
+
+        } catch (error) {
+            console.error("Error in googleSignup:", error);
+        }
+    } else {
+        console.error("Credential is null");
+    }
+};
+
+
   return (
     <>
     <Toaster toastOptions={{duration:3000}}/>
+    
     <div>
   
     <div className="min-h-screen flex items-center justify-center bg-cover bg-center" style={{backgroundImage: "url('/static/image/homestay.jpg')"}}>
@@ -96,7 +153,16 @@ function UserLogin() {
                 </button>
             </div>
         </form>
-
+        <GoogleOAuthProvider clientId="182546781376-hq2gk0p9ppricamljl6kr10bn3s68a4q.apps.googleusercontent.com" >
+                        <GoogleLogin
+                          size="medium"
+                          type="icon"
+                          onSuccess={googleSignup}
+                          onError={() => {
+                          }}
+                          
+                        />
+                      </GoogleOAuthProvider>
         <p className="mt-8 text-xs font-light text-center text-gray-700">
             {" "}
             Don't have an account?{" "}
@@ -107,7 +173,9 @@ function UserLogin() {
                 Sign up
             </a>
         </p>
+     
     </div>
+   
     </div>
     </div>
     </div>

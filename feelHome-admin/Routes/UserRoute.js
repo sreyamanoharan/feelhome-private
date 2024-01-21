@@ -17,12 +17,18 @@ import { editProfile } from "../Controller/UserController/UserController.js";
 import {verifyUserToken} from '../middlewares/auth.js';
 import { users } from "../Controller/UserController/UserController.js";
 import { getUserNum,latestUsers } from '../Controller/UserController/UserController.js'
+import {googleLogin} from '../Controller/UserController/UserController.js' 
+import { forgotPassword } from "../Controller/UserController/UserController.js";
+import {restPassword} from '../Controller/UserController/UserController.js'
 
 
 userRouter.post('/register',ClientRegister)
 userRouter.get('/verifyMail/:userId',verifyMail)
 userRouter.post('/userLogin',login)
 userRouter.post('/resendVerificationEmail',resendMail)
+userRouter.post('/googleLogin',googleLogin)
+userRouter.post('/forgotPassword',forgotPassword)
+userRouter.post('resetPassword',restPassword)
 userRouter.get('/banners',getBanner)
 userRouter.get('/getCategory',getCategory)
 userRouter.get('/getFeature',getFeature)

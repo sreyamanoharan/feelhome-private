@@ -5,14 +5,15 @@ import axiosInstance from '../../api/axios'
 import {useDispatch} from 'react-redux'
 import {userLogin} from '../../../src/store/slice/User'
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
-import GoogleLoginComponent from './GoogleLogin'
+// import GoogleLoginComponent from './GoogleLogin'
+import { jwtDecode } from "jwt-decode";
 
 
 function UserLogin() {
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [reMail,setRemail] = useState(false);
-    const [forgott,setForgott] = useState(false)
+    // const [forgott,setForgott] = useState(false)
     const dispatch=useDispatch()
     const  navigate = useNavigate()
   
@@ -50,16 +51,16 @@ function UserLogin() {
       }
     }
 
-    const forgotPassword =()=>{
-      axiosInstance.post('/forgotPassword',{email}).then((res)=>{
-       toast.success(res.data.message)
-      }).catch((error)=>{
-       if(error.response.data.errmsg){
-         toast.error(error.response.data.errmsg)
-       }
+  //   const forgotPassword =()=>{
+  //     axiosInstance.post('/forgotPassword',{email}).then((res)=>{
+  //      toast.success(res.data.message)
+  //     }).catch((error)=>{
+  //      if(error.response.data.errmsg){
+  //        toast.error(error.response.data.errmsg)
+  //      }
        
-      })
-   }
+  //     })
+  //  }
  
    const googleSignup = async (credentialResponse) => {
     console.log("hi");
@@ -77,12 +78,14 @@ function UserLogin() {
             };
             console.log("Guser", Guser);
 
-            const { data } = await axiosInstance.post("/Register", {
+            const { data } = await axiosInstance.post("/userGlogin", {
                 ...Guser,
-                isGoogle: true,
+               
             });
+            console.log(data);
 
             if (data) {
+              console.log(data);
                 const GsignCheck = data.Guser.email;
                 const GaccessToken = data.Guser.username;
 
@@ -90,7 +93,7 @@ function UserLogin() {
                     "user",
                     JSON.stringify(GaccessToken, GsignCheck)
                 );
-                navigate("/userhome");
+                navigate("/");
             }
 
         } catch (error) {
@@ -98,7 +101,7 @@ function UserLogin() {
         }
     } else {
         console.error("Credential is null");
-    }
+}
 };
 
 
@@ -153,7 +156,7 @@ function UserLogin() {
                 </button>
             </div>
         </form>
-        <GoogleOAuthProvider clientId="182546781376-hq2gk0p9ppricamljl6kr10bn3s68a4q.apps.googleusercontent.com" >
+        <GoogleOAuthProvider clientId="302509295202-asagggka1tm5j3cselpudrah4kt2gjpa.apps.googleusercontent.com" >
                         <GoogleLogin
                           size="medium"
                           type="icon"

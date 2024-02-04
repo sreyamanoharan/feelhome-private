@@ -1,6 +1,6 @@
 import express, { Router } from "express";
 const userRouter = express.Router();
-import {ClientRegister} from "../Controller/UserController/UserController.js";
+import {ClientRegister, userGlogin} from "../Controller/UserController/UserController.js";
 import {verifyMail}  from "../Controller/UserController/UserController.js";
 import {login} from '../Controller/UserController/UserController.js'
 // import { verifyUserToken } from "../middlewares/auth.js";
@@ -25,6 +25,7 @@ import {restPassword} from '../Controller/UserController/UserController.js'
 userRouter.post('/register',ClientRegister)
 userRouter.get('/verifyMail/:userId',verifyMail)
 userRouter.post('/userLogin',login)
+userRouter.post('/userGlogin',userGlogin)
 userRouter.post('/resendVerificationEmail',resendMail)
 userRouter.post('/googleLogin',googleLogin)
 userRouter.post('/forgotPassword',forgotPassword)

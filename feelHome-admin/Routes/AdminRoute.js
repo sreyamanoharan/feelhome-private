@@ -8,6 +8,7 @@ import { addType } from "../Controller/AdminController/TypeController.js";
 import { getUser,getUserNum,latestUsers,latestUsersnum,userStatus } from "../Controller/AdminController/UserController.js";
 import { graphData } from "../Controller/AdminController/AdminController.js";
 import { getBookingNum, latestBookings } from "../Controller/UserController/BookingController.js";
+import { addedProperty } from "../Controller/AdminController/PropertyController.js";
 
 
 
@@ -34,6 +35,7 @@ adminRouter.get('/userNum',getUserNum)
 adminRouter.get('/newUsers',latestUsersnum)
 adminRouter.get('/bookingNum',getBookingNum)
 adminRouter.get('/newBooking',latestBookings)
+adminRouter.get('/addedProp',addedProperty)
 
 // adminRouter.post('/postBanner',BannerController.postBanner)
 

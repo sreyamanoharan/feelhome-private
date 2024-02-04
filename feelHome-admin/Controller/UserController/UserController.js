@@ -5,8 +5,8 @@ const EMAIL_PASS = process.env.EMAIL_PASS;
 
 import nodemailer from 'nodemailer';
 import sha256 from 'sha256';
-// const FRONTENDURL =   'http://localhost:4000/'
-const FRONTENDURL =   'https://feelhome-private.vercel.app/'
+const FRONTENDURL =   'http://localhost:4000/'
+// const FRONTENDURL =   'https://feelhome-private.vercel.app/'
 import {ObjectId} from 'mongoose';  
 
 
@@ -219,12 +219,8 @@ export const latestUsers = async (req, res) => {
   try {
     const currentDate = new Date();
     const currentYear = currentDate.getFullYear();
-    const currentMonth = currentDate.getMonth() + 1; // Month is zero-based, so add 1
-
-    // Start of the current month
+    const currentMonth = currentDate.getMonth() + 1;
     const startDate = new Date(currentYear, currentMonth - 1, 1);
-
-    // End of the current month
     const endDate = new Date(currentYear, currentMonth, 0);
 
     const num = await userCollection.countDocuments({
@@ -242,62 +238,39 @@ export const latestUsers = async (req, res) => {
   }
 };
 
-export const googleLogin = async (req, res) => {
-  try {
-    let { profile } = req.body;
-    const email = profile?.email;
-    const name = profile?.name;
-    const profileImage = profile?.picture;
-    const user = await userModel.findOne({ email: email });
-    if (!user) {
-      const newUser = await userModel.create({
-        email,
-        name,
-        profileImage,
-        isVerified: true,
-      });
-      const token = generateToken(newUser._id, "user");
-      res.status(200).json({
-        message: "User login successfully",
-        name: newUser.name,
-        userId: newUser._id,
-        token,
-        role: "user",
-      });
-    } else if (user.isBlocked) {
-      res.status(403).json({ errmsg: "user is blocked by admin" });
-    } else {
-      if (!user.isVerified) {
-        if (!user.profileImage) {
-          await userModel.updateOne({ email }, { $set: { profileImage, isVerified: true } });
-        } else {
-          await userModel.updateOne({ _id: user._id }, { $set: { isVerified: true } });
-        }
-        const token = generateToken(user._id, "user");
-        res.status(200).json({
-          message: "user login successfully",
-          name: user.name,
-          token,
-          userId: user._id,
-          role: "user",
-        });
-      } else {
-        if (!user.profileImage) {
-          await userModel.updateOne({ email }, { $set: { profileImage } });
-        }
-        const token = generateToken(user._id, "user");
-        res.status(200).json({
-          message: "user login successfully",
-          name: user.name,
-          token,
-          userId: user._id,
-          role: "user",
-        });
-      }
 
+
+
+export const userGlogin = async (req, res) => {
+  try {
+    console.log("hi");
+    const data = req.body;
+    const googleEmail = data.email;
+    console.log(data.email);
+    
+    const user = await userCollection.findOne({ email: googleEmail });
+
+    if (user !== null) {
+      // Generate a token using your existing function
+      const token = generateToken(user._id, 'user');
+
+      res.status(200).json({
+        message: "Google email verified",
+        Guser: user,
+        token,
+      });
+    } else {
+      res.status(400).json("Google verification failed");
     }
-  } catch (err) { }
-};
+    console.log(user);
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+}
+
+
 
 
 const forgotPasswordMail = async (email, name, userId) => {
@@ -369,5 +342,5 @@ export default {
   verifyMail,
   login,
   resendMail,
-  googleLogin
+  
 };

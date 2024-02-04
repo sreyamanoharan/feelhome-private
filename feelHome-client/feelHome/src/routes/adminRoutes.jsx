@@ -9,6 +9,8 @@ import AdminHome from '../components/adminComponents/AdminHome'
 import AdminLogin from '../components/Login/AdminLogin'
 import UserList from '../components/adminComponents/userList'
 import AdminProtected from '../components/adminComponents/AdminProtected'
+import Propertyverify from '../components/adminComponents/Propertyverify'
+
 
 function adminRoute(){
    
@@ -21,8 +23,7 @@ function adminRoute(){
             <Route path='/MainBanner' element={<AdminProtected><MainBanner/></AdminProtected>}/>
             <Route path='/home' element={<AdminHome/>}></Route>
             <Route path='/userList' element={<AdminProtected><UserList/></AdminProtected>}></Route>
-           
-            </Route>
+            <Route path='/propverify'element={<Propertyverify/>}/></Route>
             <Route path='/adminLogin' element={<AdminLogin/>}></Route>
         </Routes>
     )

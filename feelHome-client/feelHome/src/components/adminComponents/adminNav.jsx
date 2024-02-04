@@ -30,6 +30,7 @@ const adminNav = () => {
             <li><button  onClick={()=>navigate('/admin/categoryList')} className="text-lg font-bold">Category Management</button></li>
             <li><button  onClick={()=>navigate('/admin/MainFeature')} className="text-lg font-bold">Feature Management</button></li>
             <li><button  onClick={()=>navigate('/admin/MainBanner')} className="text-lg font-bold">Banner Management</button></li>
+            <li><button  onClick={()=>navigate('/admin/propverify')} className="text-lg font-bold">Property Management</button></li>
             <button className='text-white bg-gray-900 mt-32 w-40 h-8 rounded' onClick={()=>{dispatch(adminLogout()) ,navigate('/admin/adminLogin')}}>Log Out</button>
           </ul>
          

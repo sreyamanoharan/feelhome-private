@@ -5,7 +5,8 @@ import axiosInstance from '../../api/axios'
 import {useDispatch} from 'react-redux'
 import {userLogin} from '../../../src/store/slice/User'
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
-import GoogleLoginComponent from './GoogleLogin'
+import { jwtDecode } from "jwt-decode";
+
 
 
 function UserLogin() {
@@ -77,12 +78,14 @@ function UserLogin() {
             };
             console.log("Guser", Guser);
 
-            const { data } = await axiosInstance.post("/Register", {
+            const { data } = await axiosInstance.post("/userGlogin", {
                 ...Guser,
-                isGoogle: true,
+               
             });
+            console.log(data);
 
             if (data) {
+              console.log(data);
                 const GsignCheck = data.Guser.email;
                 const GaccessToken = data.Guser.username;
 
@@ -90,15 +93,15 @@ function UserLogin() {
                     "user",
                     JSON.stringify(GaccessToken, GsignCheck)
                 );
-                navigate("/userhome");
+                navigate("/");
             }
 
         } catch (error) {
             console.error("Error in googleSignup:", error);
         }
     } else {
-        console.error("Credential is null");
-    }
+        console.error("Credential is null");
+}
 };
 
 

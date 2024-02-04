@@ -57,16 +57,19 @@ export const userGlogin =async (req,res)=>{
   try {
     console.log("hi");
     const data = req.body
-    console.log(req);
-    const googleEmail = data.email
-    console.log(data.email);
+    console.log(req.body);
+    const googleEmail = "sreyampk@gmail.com"
+    console.log(googleEmail);
 const email =await userCollection.findOne({email :googleEmail})
 console.log(email);
 
-// const token=generateToken(user._id,'user')
+const token=generateToken(email._id,'user')
 
 if(email != null){
-  res.status(200).json({message :"google email verified",Guser : email})
+  res.status(200).json({message :"google email verified",  name:email.name,
+  userId: email._id,
+  token,
+  role:'user'})
 
 }else{
   res.status(400).json("google verification failed")

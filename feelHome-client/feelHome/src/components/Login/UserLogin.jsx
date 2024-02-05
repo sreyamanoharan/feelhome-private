@@ -86,12 +86,17 @@ function UserLogin() {
 
             if (data) {
               console.log(data);
-                const GsignCheck = data.Guser.email;
-                const GaccessToken = data.Guser.username;
+                const name=data.username
+                const GsignCheck = data.email;
+                const token = data.token;
+                const role=data.role
+                const userId=data.userId
+                dispatch(userLogin({name,token,role,userId}))
+             
 
                 localStorage.setItem(
                     "user",
-                    JSON.stringify(GaccessToken, GsignCheck)
+                    JSON.stringify(token, GsignCheck)
                 );
                 navigate("/");
             }

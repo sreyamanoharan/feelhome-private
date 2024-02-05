@@ -2,7 +2,7 @@
   import { useNavigate } from 'react-router-dom'
   import { useDispatch, useSelector } from 'react-redux';
   import { addImage } from '../../store/slice/Host';
-import axios from 'axios';
+  import axios from 'axios';
 
   const hostPhotos = () => {
 

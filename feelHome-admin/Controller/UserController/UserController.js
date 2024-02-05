@@ -5,8 +5,8 @@ const EMAIL_PASS = process.env.EMAIL_PASS;
 
 import nodemailer from 'nodemailer';
 import sha256 from 'sha256';
-const FRONTENDURL =   'http://localhost:4000/'
-// const FRONTENDURL =   'https://feelhome-private.vercel.app/'
+// const FRONTENDURL =   'http://localhost:4000/'
+const FRONTENDURL =   'https://feelhome-private.vercel.app/'
 import {ObjectId} from 'mongoose';  
 
 
@@ -241,35 +241,35 @@ export const latestUsers = async (req, res) => {
 
 
 
-export const userGlogin = async (req, res) => {
+export const userGlogin =async (req,res)=>{
   try {
     console.log("hi");
-    const data = req.body;
-    const googleEmail = data.email;
-    console.log(data.email);
-    
-    const user = await userCollection.findOne({ email: googleEmail });
+    const data = req.body
+    console.log(req.body);
+    const googleEmail = data.email
+    console.log(googleEmail);
+const email =await userCollection.findOne({email :googleEmail})
+console.log(email,'hhhhhhhhh..............................eeeeeeeeeelloooo');
 
-    if (user !== null) {
-      // Generate a token using your existing function
-      const token = generateToken(user._id, 'user');
+const token=generateToken(email._id,'user')
+console.log(token,'tokkkkkkkkkkkkkkeeennnnn');
 
-      res.status(200).json({
-        message: "Google email verified",
-        Guser: user,
-        token,
-      });
-    } else {
-      res.status(400).json("Google verification failed");
-    }
-    console.log(user);
+if(email != null){
+  res.status(200).json({message :"google email verified",  name:email.name,
+  userId: email._id,
+  token,
+  role:'user'})
+
+}else{
+  res.status(400).json("google verification failed")
+}
+console.log(email);
 
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: "Internal Server Error" });
-  }
+   console.log(error);
+    
+  }
 }
-
 
 
 

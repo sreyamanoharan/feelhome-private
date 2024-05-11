@@ -13,15 +13,15 @@ const app = express();
 const port = 3000;
 const dbUrl = 'mongodb://127.0.0.1:27017/feelHome';
 
-// Middleware
+
 app.use(cors({
    origin: ["http://localhost:4000", "https://feelhome-private.vercel.app"],
   methods: ["GET", "POST","PATCH","PUT" ],
   credentials: true,
 }));
-app.use(express.json()); // Parse JSON request bodies
+app.use(express.json()); 
 
-// Routes
+
 app.use('/', userRouter);
 app.use('/admin', adminRouter);
 app.use('/host', hostRouter);

@@ -13,7 +13,7 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [PhoneNumber, setPhoneNumber] = useState('')
   const [password, setPassword] = useState('')
-  const [ConfirmPassword, setConfirmPassword] = useState('')
+  const [ConfirmPassword, setConfirmPassword] = useState('')  
   const [Err, setErr] = useState(null)
 
   const regex_password = /^(?=.*?[A-Z])(?=.*[a-z])(?=.*[0-9]){8,16}/

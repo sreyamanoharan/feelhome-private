@@ -267,8 +267,8 @@ console.log(email);
 
   } catch (error) {
    console.log(error);
-    
-  }
+
+  }
 }
 
 
